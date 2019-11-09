@@ -1,3 +1,34 @@
+export const eventsCarousel=[
+    {
+        id: 1,
+        source: require('../assets/images/event1.jpg')
+    },
+    {
+        id: 2,
+        source: require('../assets/images/event2.jpg')
+    },
+    {
+        id: 3,
+        source: require('../assets/images/event3.jpeg')
+    },
+    {
+        id: 4,
+        source: require('../assets/images/event4.png')
+    },
+    {
+        id: 5,
+        source: require('../assets/images/event5.png')
+    },
+    {
+        id: 6,
+        source: require('../assets/images/event6.jpg')
+    },
+    {
+        id: 7,
+        source: require('../assets/images/event7.jpg')
+    }
+]
+
 export const flashSale = [
     {
         id: 1,

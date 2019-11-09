@@ -20,13 +20,15 @@ import FlashSale from '../layouts/FlashSale';
 import SeenProducts from '../layouts/seenProducts';
 import CategoriesNominated from '../layouts/nominatedCategories';
 import ProductsNominated from '../layouts/nominatedProducts';
+import EventsCarousel from '../layouts/EventsCarousel';
 
-import { flashSale, ProductsSeen, CategoriesNomina, ProductsNomina} from '../utils/data_test.js';
+import { flashSale, ProductsSeen, CategoriesNomina, ProductsNomina, eventsCarousel} from '../utils/data_test.js';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      DataEventCarousel: eventsCarousel,
       DataFlashSale: flashSale,
       DataProductsSeen: ProductsSeen,
       DataCategoritesNominated: CategoriesNomina,
@@ -86,6 +88,7 @@ export default class HomeScreen extends React.Component {
               onRefresh={this._onRefresh.bind(this)}
               />}
         >
+            <EventsCarousel images={this.state.DataEventCarousel}/>
             <FlashSale data={this.state.DataFlashSale} />
             <SeenProducts data={this.state.DataProductsSeen} />
             <CategoriesNominated data={this.state.DataCategoritesNominated} />
