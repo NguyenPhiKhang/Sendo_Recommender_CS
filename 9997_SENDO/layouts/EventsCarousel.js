@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Dimensions, Image} from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, Image, TouchableHighlight} from 'react-native';
 
-const DEVICE_WIDTH = Dimensions.get("window").width-10;
+
+const DEVICE_WIDTH = Dimensions.get("window").width - 10;
 
 export default class EventsCarousel extends React.Component {
     scrollRef = React.createRef();
@@ -39,7 +40,7 @@ export default class EventsCarousel extends React.Component {
         const { images } = this.props;
         const { selectedIndex } = this.state;
         return (
-            <View style={{ flex: 1, height: 210,  marginVertical: 10, paddingHorizontal: 5 }}>
+            <View style={{ flex: 1, height: 220, marginVertical: 10, paddingHorizontal: 5 }}>
                 <ScrollView
                     horizontal
                     pagingEnabled
@@ -50,12 +51,12 @@ export default class EventsCarousel extends React.Component {
                     {
                         images.map(image => {
                             return (
-                                <Image
-                                    key={image.id}
-                                    source={image.source}
-                                    style={styles.backgroundImage}
-                                    
-                                />
+                                <TouchableHighlight key={image.id} onPress={()=>{console.log("press image event");}}>
+                                    <Image
+                                        source={image.source}
+                                        style={styles.backgroundImage}
+                                    />
+                                </TouchableHighlight>
                             )
                         })
                     }
@@ -64,8 +65,8 @@ export default class EventsCarousel extends React.Component {
                     {
                         images.map((image, i) => {
                             return (
-                                <View key={image.id} style={[styles.whiteCircle, 
-                                { height:i === selectedIndex ? 6 : 2, backgroundColor: i === selectedIndex ? '#ec515a': '#fff'}]}>
+                                <View key={image.id} style={[styles.whiteCircle,
+                                { height: i === selectedIndex ? 12 : 2, backgroundColor: i === selectedIndex ? '#ec515a' : '#fff' }]}>
                                 </View>
                             )
                         })
@@ -80,22 +81,21 @@ const styles = StyleSheet.create({
     backgroundImage: {
         width: DEVICE_WIDTH,
         height: 200,
-        resizeMode:'stretch',
+        resizeMode: 'stretch',
         borderRadius: 3,
         justifyContent: 'center',
         alignItems: 'center',
     },
     circleDiv: {
         width: '100%',
-        height: 5,
+        height: 15,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
     },
     whiteCircle: {
         width: 12,
-        height: 2,
-        borderRadius: 2,
+        borderRadius: 10,
         marginHorizontal: 5,
         backgroundColor: "#fff",
     }

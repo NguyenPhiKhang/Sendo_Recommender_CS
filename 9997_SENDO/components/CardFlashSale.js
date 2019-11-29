@@ -1,10 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, ImageBackground, Text, Platform } from 'react-native';
 
 export default function CardFlashSale(props) {
     const { imgBackground, imgDiscount, disPercent, Price, id } = props;
 
     //const formatter = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' });
+
+    function eArabic(x){
+        if(Platform.OS === 'android') { // only android needs polyfill
+            require('intl'); // import intl object
+            require('intl/locale-data/jsonp/it-IT'); // load the required locale details
+          }
+        return x.toLocaleString('it-IT');
+      }
 
     return (
         <View style={styles.flashSaleContainer} key={id}>
@@ -17,7 +25,7 @@ export default function CardFlashSale(props) {
                 </View>
             </ImageBackground>
             <View style={styles.Vprice}>
-                <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{Price}đ</Text>
+                <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{eArabic(Price)} đ</Text>
             </View>
         </View>
     );

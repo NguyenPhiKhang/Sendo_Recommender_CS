@@ -55,11 +55,11 @@ export default class HomeScreen extends React.Component {
 
       headerRight: (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
-          <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={() => console.log('search')}>
-            <Ionicons name={Platform.OS == 'ios' ? 'ios-search' : 'md-search'} size={35} color='#fff' />
+          <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={()=>{navigation.navigate('Search');}}>
+            <Ionicons name={Platform.OS == 'ios' ? 'ios-search' : 'md-search'} size={30} color='#fff' />
           </TouchableOpacity>
-          <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={() => console.log('cart')}>
-            <Ionicons name={Platform.OS == 'ios' ? 'ios-cart' : 'md-cart'} size={35} color='#ec515a' />
+          <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={() => console.log('cart')}>
+            <Ionicons name={Platform.OS == 'ios' ? 'ios-cart' : 'md-cart'} size={30} color='#ec515a' />
           </TouchableOpacity>
         </View>
       ),
@@ -91,8 +91,8 @@ export default class HomeScreen extends React.Component {
             <EventsCarousel images={this.state.DataEventCarousel}/>
             <FlashSale data={this.state.DataFlashSale} />
             <SeenProducts data={this.state.DataProductsSeen} />
-            <CategoriesNominated data={this.state.DataCategoritesNominated} />
-            <ProductsNominated data={this.state.DataProductsNominated}/>
+            <CategoriesNominated data={this.state.DataCategoritesNominated}/>
+            <ProductsNominated data={this.state.DataProductsNominated} navigate={this.props.navigation.navigate}/>
         </ScrollView>
         {/* <Text>KAHNG PRO</Text> */}
       </View>

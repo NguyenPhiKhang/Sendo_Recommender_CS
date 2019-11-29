@@ -6,6 +6,9 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import DetailsProductScreen from '../screens/DetailsProductScreen';
+import SearchScreen from '../screens/SearchScreen';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -15,21 +18,42 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    //Categories: CategoriesScreen,
+    DetailsProduct: DetailsProductScreen,
+    Search : SearchScreen,
   },
-  config
+  config,
+  // {
+  //   navigationOptions: ({ navigation }) => ({
+  //     tabBarVisible: navigation.state.routes[navigation.state.index].routeName === 'DetailsProduct' ? false : true,
+  //   })
+  // }
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        'md-home'
-      }
-    />
-  ),
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  for (let i = 0; i < navigation.state.routes.length; i++) {
+    if (navigation.state.routes[i].routeName != "Home") {
+      tabBarVisible = false;
+    }
+  }
+
+  if (tabBarVisible) {
+    return {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+          focused={focused}
+          name={
+            'md-home'
+          }
+        />
+      ),
+    };
+  }
+  else return {tabBarVisible};
 };
+
 
 HomeStack.path = '';
 
@@ -70,17 +94,17 @@ const tabNavigator = createBottomTabNavigator({
   LinksStack,
   SettingsStack,
 },
-{
-  tabBarOptions:{
-    style: {backgroundColor: "#20242a",},
-    activeTintColor: '#ec515a',
+  {
+    tabBarOptions: {
+      style: { backgroundColor: "#20242a", },
+      activeTintColor: '#ec515a',
+    },
   }
-}
 );
 
 tabNavigator.path = '';
 
-tabNavigator.navigationOptions={
+tabNavigator.navigationOptions = {
 }
 
 export default tabNavigator;

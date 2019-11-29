@@ -4,7 +4,7 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import CardProducts from '../components/CardProducts';
 
 export default function ProductsNominated(props) {
-    const { data } = props;
+    const { data, navigate } = props;
     return (
         <View style={styles.flashSaleContainer}>
             <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5}}>
@@ -21,14 +21,14 @@ export default function ProductsNominated(props) {
                     }}>
                     <View style={{flexDirection:'row'}}>
                         {data.slice(0, Math.ceil(data.length / 2)).map(item => {
-                            return <CardProducts key={item.id} imgBackground={item.srcBackground} imgDiscount={item.srcDiscountBG}
-                            disPercent={item.disPercent} Price={item.price} stars={item.stars} NameProduct={item.NameProduct}/>
+                            return <CardProducts item={item} key={item.id}
+                            onGoToProduct={navigate}/>
                         })}
                     </View>
                     <View style={{flexDirection:'row'}}>
                         {data.slice(Math.ceil(data.length / 2)).map(item => {
-                            return <CardProducts key={item.id} imgBackground={item.srcBackground} imgDiscount={item.srcDiscountBG}
-                            disPercent={item.disPercent} Price={item.price} stars={item.stars} NameProduct={item.NameProduct}/>
+                            return <CardProducts item={item} key={item.id}
+                            onGoToProduct={navigate}/>
                         })}
                     </View>
                 </ScrollView>
