@@ -4,31 +4,29 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import DetailsProductScreen from '../screens/DetailsProductScreen';
 import SearchScreen from '../screens/SearchScreen';
+import AccountScreen from '../screens/AccountScreen';
+import RewardScreen from '../screens/RewardScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+// const config = Platform.select({
+//   web: { headerMode: 'screen' },
+//   default: {},
+// });
 
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    //Categories: CategoriesScreen,
     DetailsProduct: DetailsProductScreen,
     Search : SearchScreen,
   },
-  config,
-  // {
-  //   navigationOptions: ({ navigation }) => ({
-  //     tabBarVisible: navigation.state.routes[navigation.state.index].routeName === 'DetailsProduct' ? false : true,
-  //   })
-  // }
-);
+  {
+    cardStyle: {backgroundColor: "#20242a"},
+  }
+)
 
 HomeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
@@ -57,27 +55,31 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const RewardStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Reward: RewardScreen,
   },
-  config
+  {
+    cardStyle: {backgroundColor: "#20242a"},
+  }
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Rewards',
+RewardStack.navigationOptions = {
+  tabBarLabel: 'Reward Market',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-ribbon' : 'md-ribbon'} />
   ),
 };
 
-LinksStack.path = '';
+RewardStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
-  config
+  {
+    cardStyle: {backgroundColor: "#20242a"},
+  }
 );
 
 SettingsStack.navigationOptions = {
@@ -89,10 +91,41 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const AccountStack = createStackNavigator(
+  {
+    Account: AccountScreen,
+    Login: LoginScreen,
+  },
+  {
+    cardStyle: {backgroundColor: "#20242a"},
+  }
+);
+
+AccountStack.navigationOptions=({ navigation }) => {
+  let tabBarVisible = true;
+  for (let i = 0; i < navigation.state.routes.length; i++) {
+    if (navigation.state.routes[i].routeName != "Account") {
+      tabBarVisible = false;
+    }
+  }
+
+  if (tabBarVisible) {
+    return {
+      tabBarLabel: 'Account',
+      tabBarIcon: ({ focused }) => (
+        <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
+      ),
+    };
+  }
+  else return {tabBarVisible};
+};
+
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  RewardStack,
   SettingsStack,
+  AccountStack,
 },
   {
     tabBarOptions: {

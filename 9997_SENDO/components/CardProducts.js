@@ -1,68 +1,57 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Platform } from '@unimodules/core';
+import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Platform } from 'react-native';
+import {ConvertCurrency, renderStars} from '../constants/FunctionDefine';
 
-function eArabic(x){
-    if(Platform.OS === 'android') { // only android needs polyfill
-        require('intl'); // import intl object
-        require('intl/locale-data/jsonp/it-IT'); // load the required locale details
-      }
-    return x.toLocaleString('it-IT');
-  }
-
-export default function CardFlashSale(props) {
-    const { item:{srcBackground, srcDiscountBG, disPercent, price, id, stars, NameProduct}, onGoToProduct } = props;
-
-    const renderStars = () => {
-        const fields = [];
-        for (let i = 0; i < 5; i++) {
-            if (i < stars) {
-                fields.push(
-                    <Ionicons key={i} name={Platform.OS == 'ios' ? 'ios-star' : 'md-star'} color='rgb(242, 201, 76)' size={10} />
-                );
-            }
-            else {
-                fields.push(
-                    <Ionicons key={i} name={Platform.OS == 'ios' ? 'ios-star' : 'md-star'} color='silver' size={10} />
-                );
-            }
-        }
-        return fields;
-    };
+export default function CardProducts(props) {
+    const { item: { image, rating_info, price, special_price, name }, onGoToProduct } = props;
+    let minPrice = (special_price==0)?price: special_price;
+    let maxPrice = price;
+    let disPercent = 0;
 
     const DrawDiscountPercent = () => {
-        if (disPercent > 0) {
+        disPercent = minPrice / maxPrice;
+        //console.log(minPrice);
+        if (disPercent < 1) {
             return (
                 <ImageBackground style={{ width: 32, height: 17, alignItems: 'center', justifyContent: 'center' }}
-                    source={srcDiscountBG}>
-                    <Text style={{ color: '#fff', fontSize: 10 }}>{disPercent}%</Text>
+                    source={require("../assets/images/intersect.png")}>
+                    <Text style={{ color: '#fff', fontSize: 10 }}>{Math.ceil(100 - disPercent * 100)}%</Text>
                 </ImageBackground>
             );
         }
+        else { }
     }
 
-    const onPressProduct=()=>{
-        onGoToProduct('DetailsProduct', {...props.item});
+    const onPressProduct = () => {
+        onGoToProduct('DetailsProduct', { ...props.item, minPrice ,disPercent});
     }
 
     return (
-        <TouchableOpacity style={styles.flashSaleContainer} key={id} onPress={onPressProduct}>
-            <ImageBackground style={styles.Background} source={srcBackground[0].source}>
-                <View style={{ flexDirection: 'column', justifyContent: 'space-between', height: 100, width: 100 }}>
+        <TouchableOpacity style={styles.flashSaleContainer} onPress={onPressProduct}>
+            <ImageBackground style={styles.Background} source={{ uri: image }}
+                imageStyle={{
+                    borderRadius: 17,
+                }}>
+                <View style={{
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    backgroundColor: 'rgba(0,0,0, .25)',
+                    height: 100, width: 100,
+                    borderRadius: 17,
+                }}>
                     <View style={{ alignItems: 'center', justifyContent: 'flex-end', flexDirection: 'row' }}>
                         {DrawDiscountPercent()}
                     </View>
                     <View style={{ flexDirection: "row", marginLeft: 10 }}>
-                        {renderStars()}
+                        {renderStars(4 ,10,'red')}
                     </View>
                 </View>
             </ImageBackground>
             <View style={styles.VName}>
-                <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', textAlign: 'center' }}>{NameProduct}</Text>
+                <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', textAlign: 'center' }}>{name}</Text>
             </View>
             <View style={styles.Vprice}>
-                <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{eArabic(price)} đ</Text>
+            <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{ConvertCurrency(minPrice + "")}đ</Text>
             </View>
         </TouchableOpacity>
     );
@@ -79,7 +68,6 @@ const styles = StyleSheet.create({
     Background: {
         width: 100,
         height: 100,
-        borderRadius: 16,
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -90,7 +78,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    VName:{
+    VName: {
         width: 100,
         height: 50,
         alignItems: 'center',

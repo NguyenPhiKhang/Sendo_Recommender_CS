@@ -32,7 +32,7 @@ export default class HomeScreen extends React.Component {
       DataFlashSale: flashSale,
       DataProductsSeen: ProductsSeen,
       DataCategoritesNominated: CategoriesNomina,
-      DataProductsNominated: ProductsNomina,
+      DataProductsNominated: '',
       refreshing: false,
     }
   }
@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
 
       headerRight: (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
-          <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={()=>{navigation.navigate('Search');}}>
+          <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={()=>{navigation.push('Search');}}>
             <Ionicons name={Platform.OS == 'ios' ? 'ios-search' : 'md-search'} size={30} color='#fff' />
           </TouchableOpacity>
           <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={() => console.log('cart')}>
@@ -76,6 +76,13 @@ export default class HomeScreen extends React.Component {
     await setTimeout(()=>{this.setState({refreshing: false});}, 1000);
   }
 
+  componentDidMount = async () => {
+    const response = await fetch('http://amnhac.pro/public/index');
+    const jsonData = await response.json();
+    this.setState({DataProductsNominated: jsonData});
+    //console.log(this.state.DataProductsNominated);
+  }
+
   render() {
     //console.log(this.state.DataFlashSale);
     return (
@@ -92,9 +99,11 @@ export default class HomeScreen extends React.Component {
             <FlashSale data={this.state.DataFlashSale} />
             <SeenProducts data={this.state.DataProductsSeen} />
             <CategoriesNominated data={this.state.DataCategoritesNominated}/>
-            <ProductsNominated data={this.state.DataProductsNominated} navigate={this.props.navigation.navigate}/>
+            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
+                    <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm đề cử</Text>
+                </View>
+            <ProductsNominated datas={this.state.DataProductsNominated} navigate={this.props.navigation.navigate}/>
         </ScrollView>
-        {/* <Text>KAHNG PRO</Text> */}
       </View>
     )
   };
