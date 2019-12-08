@@ -10,6 +10,10 @@ import SearchScreen from '../screens/SearchScreen';
 import AccountScreen from '../screens/AccountScreen';
 import RewardScreen from '../screens/RewardScreen';
 import LoginScreen from '../screens/LoginScreen';
+import CategoriesScreen from '../screens/CategoriesScreen';
+import ResultSearchScreen from '../screens/ResultSearchScreen';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { Provider, connect } from 'react-redux';
 
 
 // const config = Platform.select({
@@ -17,14 +21,24 @@ import LoginScreen from '../screens/LoginScreen';
 //   default: {},
 // });
 
+
+let InforUserFBHomeContainer = connect(state => ({ dataUserFB: state.dataUserFB,  }))(HomeScreen);
+let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(DetailsProductScreen);
+let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(SearchScreen);
+let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(ResultSearchScreen);
+let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataCategories: state.dataCategories }))(CategoriesScreen);
+
+
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    DetailsProduct: DetailsProductScreen,
-    Search : SearchScreen,
+    Home: InforUserFBHomeContainer,
+    DetailsProduct: InforUserFBDetailContainer,
+    Search: InforUserFBSearchContainer,
+    Categories: InforUserFBCagegoriesContainer,
+    ResultSearch: InforUserFBSearchResultContainer,
   },
   {
-    cardStyle: {backgroundColor: "#20242a"},
+    cardStyle: { backgroundColor: "#20242a" },
   }
 )
 
@@ -49,18 +63,20 @@ HomeStack.navigationOptions = ({ navigation }) => {
       ),
     };
   }
-  else return {tabBarVisible};
+  else return { tabBarVisible };
 };
 
 
 HomeStack.path = '';
 
+let InforUserFBRewardContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(RewardScreen);
+
 const RewardStack = createStackNavigator(
   {
-    Reward: RewardScreen,
+    Reward: InforUserFBRewardContainer,
   },
   {
-    cardStyle: {backgroundColor: "#20242a"},
+    cardStyle: { backgroundColor: "#20242a" },
   }
 );
 
@@ -73,12 +89,15 @@ RewardStack.navigationOptions = {
 
 RewardStack.path = '';
 
+
+let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(SettingsScreen);
+
 const SettingsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Settings: InforUserFBSettingContainer,
   },
   {
-    cardStyle: {backgroundColor: "#20242a"},
+    cardStyle: { backgroundColor: "#20242a" },
   }
 );
 
@@ -91,17 +110,20 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(AccountScreen);
+let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(LoginScreen);
+
 const AccountStack = createStackNavigator(
   {
-    Account: AccountScreen,
-    Login: LoginScreen,
+    Account: InforUserFBAccountContainer,
+    Login: InforUserFBLoginContainer,
   },
   {
-    cardStyle: {backgroundColor: "#20242a"},
+    cardStyle: { backgroundColor: "#20242a" },
   }
 );
 
-AccountStack.navigationOptions=({ navigation }) => {
+AccountStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   for (let i = 0; i < navigation.state.routes.length; i++) {
     if (navigation.state.routes[i].routeName != "Account") {
@@ -117,22 +139,37 @@ AccountStack.navigationOptions=({ navigation }) => {
       ),
     };
   }
-  else return {tabBarVisible};
+  else return { tabBarVisible };
 };
 
 
-const tabNavigator = createBottomTabNavigator({
+// const tabNavigator = createBottomTabNavigator({
+//   HomeStack,
+//   RewardStack,
+//   SettingsStack,
+//   AccountStack,
+// },
+//   {
+//     tabBarOptions: {
+//       style: { backgroundColor: "#20242a", },
+//       activeTintColor: '#ec515a',
+//     },dataUserFB
+//   }
+// );
+
+
+const tabNavigator = createMaterialBottomTabNavigator({
   HomeStack,
   RewardStack,
   SettingsStack,
   AccountStack,
 },
   {
-    tabBarOptions: {
-      style: { backgroundColor: "#20242a", },
-      activeTintColor: '#ec515a',
-    },
-  }
+    initialRouteName: 'HomeStack',
+    activeColor: '#ec515a',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#20242a', borderTopColor: 'rgb(41, 46, 54)',borderTopWidth: 2, },
+  },
 );
 
 tabNavigator.path = '';

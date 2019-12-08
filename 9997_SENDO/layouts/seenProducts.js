@@ -6,9 +6,6 @@ export default function SeenProducts(props) {
     const { data } = props;
     return (
         <View style={styles.SeenProductContainer}>
-            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5}}>
-                <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
-            </View>
             <View style={{ width: "100%", height: 120 }}>
                 <ScrollView
                     horizontal={true}

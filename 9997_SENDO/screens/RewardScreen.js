@@ -47,7 +47,7 @@ const SecondRoute = () => {
                             <Ionicons color='rgb(199, 199, 204)' name='ios-arrow-forward' size={23} />
                         </TouchableOpacity>
                     </View>
-                    <Image source={require('../assets/images/voucherSendo.jpg')}
+                    <Image source={require('../assets/images/voucher411.png')}
                         style={{ height: 130, width: "100%", borderRadius: 16 }} resizeMode='stretch' />
                 </View>
                 <View style={[styles.viewVoucher, { height: 260 }]}>
@@ -142,8 +142,14 @@ export default class RewardScreen extends Component {
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                <MaterialCommunityIcons color='rgb(26, 188, 254)' size={23} name='folder-download' />
-                                <MaterialCommunityIcons color='rgb(26, 188, 254)' size={23} name='folder-upload' />
+                                <TouchableOpacity style={{marginRight: 5, marginBottom: 3}}>
+                                    <Image source={require('../assets/images/withdraw.png')}
+                                        style={{ height: 20, width: 20, borderRadius: 2 }} resizeMode='stretch' />
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{marginBottom: 3}}>
+                                    <Image source={require('../assets/images/topup.png')}
+                                        style={{ height: 20, width: 20, borderRadius: 2 }} resizeMode='stretch' />
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>

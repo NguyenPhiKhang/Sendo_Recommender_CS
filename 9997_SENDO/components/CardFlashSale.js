@@ -1,19 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Text, Platform } from 'react-native';
+import { ConvertCurrency } from '../constants/FunctionDefine';
+import ProgressBar from 'react-native-simple-progress-bar';
 
 export default function CardFlashSale(props) {
     const { imgBackground, imgDiscount, disPercent, Price, id } = props;
-
-    //const formatter = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'VND' });
-
-    function eArabic(x){
-        if(Platform.OS === 'android') { // only android needs polyfill
-            require('intl'); // import intl object
-            require('intl/locale-data/jsonp/it-IT'); // load the required locale details
-          }
-        return x.toLocaleString('it-IT');
-      }
-
     return (
         <View style={styles.flashSaleContainer} key={id}>
             <ImageBackground style={styles.Background} source={imgBackground}>
@@ -23,9 +14,17 @@ export default function CardFlashSale(props) {
                         <Text style={{ color: '#fff', fontSize: 10 }}>{disPercent}%</Text>
                     </ImageBackground>
                 </View>
+                <View style={{ marginLeft: 10 }}>
+                        <Text style={{ color: '#f2c94c', fontSize: 12, alignSelf: 'flex-end', marginRight: 10 }}>Đã bán 10</Text>
+                        <ProgressBar
+                            fillStyle={{ backgroundColor: '#f2c94c', height: 3 }}
+                            style={{ width: 80, borderRadius: 10, height: 3, backgroundColor: 'silver', marginBottom: 8, marginTop: 3 }}
+                            progress={0.5}
+                        />
+                    </View>
             </ImageBackground>
             <View style={styles.Vprice}>
-                <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{eArabic(Price)} đ</Text>
+                <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{ConvertCurrency(Price + '')}đ</Text>
             </View>
         </View>
     );

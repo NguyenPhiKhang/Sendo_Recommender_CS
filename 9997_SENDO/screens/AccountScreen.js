@@ -12,28 +12,58 @@ export default class AccountScreen extends Component {
     };
   }
 
+  checkHideShowAvatar = (dataUserFB) => {
+    //console.log(dataUserFB);
+    if (dataUserFB === 0) {
+      return <Image source={require('../assets/images/user.png')} style={{ width: 150, height: 150, borderRadius: 75 }} />
+    }
+    else return <Image source={{ uri: dataUserFB.picture.data.url }} style={{ width: 150, height: 150, borderRadius: 75 }} />
+  }
+  checkHideShowLogin = (dataUserFB) => {
+    if (dataUserFB === 0) {
+      return (
+        <View style={{ alignItems: 'center', paddingTop: 135, justifyContent:'center' }}>
+          <TouchableOpacity style={styles.btnLogOI} onPress={() => { this.props.navigation.navigate('Login') }}>
+            <Text style={{ color: 'rgb(26, 188, 254)', fontSize: 20, fontWeight: 'bold' }}>Đăng nhập</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnLogOI}>
+            <Text style={{ color: 'rgb(26, 188, 254)', fontSize: 20, fontWeight: 'bold' }}>Đăng ký</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    else {
+      return (
+        <View style={{ alignItems: 'center', paddingTop: 135, justifyContent:'center' }}>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>{dataUserFB.name}</Text>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>{dataUserFB.email}</Text>
+          <TouchableOpacity style={styles.btnLogOI} onPress={() => { this.props.dispatch({type:'success', data: 0})}}>
+            <Text style={{ color: 'rgb(26, 188, 254)', fontSize: 20, fontWeight: 'bold' }}>Đăng xuất</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
+  }
+
   render() {
+    const { dataUserFB } = this.props;
     return (
       <View style={styles.container}>
         <View style={{ backgroundColor: 'rgb(41, 46, 54)', height: 120, paddingTop: STATUSBAR_HEIGHT + 10, alignItems: 'center' }}>
           <Text style={{ color: 'rgb(255,255,255)', fontSize: 25, fontWeight: 'bold' }}>Account</Text>
         </View>
-        <View style={styles.rewardUser}>
+        <View style={styles.User}>
           <View style={{
-            borderRadius: 75, height: '100%', width: '100%', backgroundColor: 'rgb(41, 46, 54)',
-            justifyContent: 'space-around', paddingVertical: 10
+            height: '100%', width: '100%', backgroundColor: 'transparent',
+            justifyContent: 'center', alignItems:'center', paddingVertical: 10
           }}>
-            <Image source={require('../assets/images/user.png')} style={{ width: 150, height: 150 }} />
+            {
+              this.checkHideShowAvatar(dataUserFB)
+            }
           </View>
         </View>
-        <View style={{  alignItems:'center', paddingLeft: 40 }}>
-          <TouchableOpacity style={styles.btnLogOI} onPress={()=>{this.props.navigation.navigate('Login')}}>
-            <Text style={{ color: 'rgb(236, 81, 90)', fontSize: 20, fontWeight: 'bold' }}>Đăng nhập</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnLogOI}>
-            <Text style={{ color: 'rgb(236, 81, 90)', fontSize: 20, fontWeight: 'bold' }}>Đăng ký</Text>
-          </TouchableOpacity>
-        </View>
+        {this.checkHideShowLogin(dataUserFB)}
       </View>
     );
   }
@@ -47,21 +77,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  rewardUser: {
+  User: {
     height: 150,
-    width: 160,
+    width: '100%',
     alignItems: "center",
+    justifyContent: 'center',
     backgroundColor: 'transparent',
     paddingLeft: 10,
     position: 'absolute',
-    top: 80,
+    top: 100,
     left: 0,
   },
   btnLogOI: {
-    backgroundColor: 'rgba(255,255,255, 0.8)',
+    backgroundColor: 'rgb(41,46,54)',
     width: 110, height: 30,
     borderRadius: 5,
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 5,
   }

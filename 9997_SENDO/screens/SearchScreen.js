@@ -15,7 +15,15 @@ export default class SearchScreen extends Component {
         super(props);
         this.state = {
             DataProductsSeen: ProductsSeen,
+            textValue: '',
         };
+    }
+
+    onSearchKey = (value) => {
+        console.log('fkahsdf');
+        if (value != '') {
+            this.props.navigation.navigate('ResultSearch', {valueText: this.state.textValue});
+        }
     }
 
     render() {
@@ -31,9 +39,16 @@ export default class SearchScreen extends Component {
                         <TextInput
                             placeholder="Tìm kiếm trên Sendo"
                             underlineColorAndroid="transparent"
+                            returnKeyType='search'
                             placeholderTextColor="rgba(255, 255, 255, 0.6)"
                             style={{ color: '#fff', width: 280 }}
                             autoFocus={true}
+                            onSubmitEditing={()=>this.onSearchKey(this.state.textValue+'')}
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            onChangeText={(text) => { this.setState({ textValue: text+'' }) }}
+                            value={this.state.textValue}
+                            //controlled={true}
                         />
                         <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => console.log('cart')}>
                             <Ionicons name={Platform.OS == 'ios' ? 'ios-cart' : 'md-cart'} size={35} color='#ec515a' />

@@ -7,9 +7,6 @@ export default function FlashSale(props) {
     const { data } = props;
     return (
         <View style={styles.flashSaleContainer}>
-            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5}}>
-                <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>FlashSale</Text>
-            </View>
             <View style={{ width: "100%", height: 300 }}>
                 <ScrollView
                     horizontal={true}
@@ -40,7 +37,7 @@ export default function FlashSale(props) {
 const styles = StyleSheet.create({
     flashSaleContainer: {
         flex: 1,
-        height: 330,
+        height: 300,
         marginBottom: 20,
     }
 })

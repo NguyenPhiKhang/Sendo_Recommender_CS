@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, NativeModules, Platform } from 'react-native';
+import { View, Image, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, NativeModules, Platform, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import * as Facebook from 'expo-facebook';
@@ -7,43 +7,86 @@ const { StatusBarManager } = NativeModules;
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 35 : StatusBarManager.HEIGHT;
 
+const CheckLoadingLogin = (props) => {
+    if (props.loading) {
+        return (
+            <View style={styles.loadingIndicatior}>
+                <ActivityIndicator size='large' color='red'></ActivityIndicator>
+            </View>)
+    }
+    else return null;
+}
+
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            textUser: '',
+            isLoading: false,
         };
     }
-    
-    onPressLoginFb = async ()=>{
+
+    onPressLoginFb = async () => {
         try {
             const {
                 type,
                 token,
-                expires,
-                permissions,
-                declinedPermissions,
-            } = await Facebook.logInWithReadPermissionsAsync('1002868356715145', {
-                permissions: ['public_profile'],
+            } = await Facebook.logInWithReadPermissionsAsync('544644536088007', {
+                permissions: ['public_profile', 'email'],
             });
             console.log(type);
             console.log(token);
-            //   if (type === 'success') {
-            //     // Get the user's name using Facebook's Graph API
-            //     const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-            //     Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-            //   } else {
-            //     // type === 'cancel'
-            //   }
+            if (type === 'success') {
+                // Get the user's name using Facebook's Graph API
+                // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`);
+                // const json = await response.json();
+                // console.log(json);
+                // this.props.dispatch({ type: type, data: json });
+                // this.props.navigation.navigate('Account');
+                this.setState({ isLoading: true })
+                const response = await fetch('http://amnhac.pro/public/loginFB', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        token
+                    }),
+                });
+                const json = await response.json();
+                await this.props.dispatch({ type: type, data: json.info });
+                await this.props.navigation.navigate('Account');
+                this.setState({ isLoading: false });
+            } else {
+                this.setState({ isLoading: false });
+            }
         } catch ({ message }) {
             alert(`Facebook Login Error: ${message}`);
         }
+    }
+
+    onPressLogin = async () => {
+        const response = await fetch('http://amnhac.pro/public/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: this.state.textUser,
+                pass: null,
+            }),
+        });
+        const status = await response.json();
+        console.log(status);
     }
 
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <View sytle={{ paddingHorizontal: 20, }}>
-                    <View style={{ width: '100%', }}>
+                    <View style={{ width: '100%', marginLeft: 10 }}>
                         <TouchableOpacity style={{ width: 30, height: 45 }}
                             onPress={() => { this.props.navigation.goBack(); }}>
                             <Ionicons color='#fff' name='ios-arrow-back' size={30} />
@@ -55,21 +98,23 @@ export default class LoginScreen extends Component {
                         <Text style={{ color: 'rgba(255,255,255,0.8)', fontSize: 20, marginTop: 10, marginBottom: 30, fontWeight: 'bold' }}>Đăng nhập vào Sendo</Text>
                         <TextInput
                             style={styles.input}
+                            autoFocus={true}
                             placeholder='Email hoặc số điện thoại'
                             placeholderTextColor='rgba(255,0,0,0.4)'
-                            returnKeyType='next' 
+                            returnKeyType='next'
                             autoCapitalize='none'
                             autoCorrect={false}
-                            onSubmitEditing={()=>this.passwordInput.focus()}/>
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            onChangeText={(text) => this.setState({ textUser: text })} />
                         <TextInput
                             style={styles.input}
                             placeholder='Mật khẩu'
                             placeholderTextColor='rgba(255,0,0,0.5)'
                             returnKeyType='go'
                             secureTextEntry
-                            ref={input=>this.passwordInput = input} />
-                        <TouchableOpacity style={[styles.input, { backgroundColor: '#D03627', alignItems:'center', justifyContent:'center' }]} onPress={()=>{console.log('Login....')}}>
-                            <Text style={{ color:'#fff', fontSize: 25 }}>Đăng Nhập</Text>
+                            ref={input => this.passwordInput = input} />
+                        <TouchableOpacity style={[styles.input, { backgroundColor: '#D03627', alignItems: 'center', justifyContent: 'center' }]} onPress={this.onPressLogin}>
+                            <Text style={{ color: '#fff', fontSize: 25 }}>Đăng Nhập</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -80,6 +125,10 @@ export default class LoginScreen extends Component {
                         <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>Facebook</Text>
                     </TouchableOpacity>
                 </View>
+                {/* <View style={styles.loadingIndicatior}>
+                    <ActivityIndicator size='large' color='red'></ActivityIndicator>
+                </View> */}
+                <CheckLoadingLogin loading={this.state.isLoading} />
             </KeyboardAvoidingView>
         );
     }
@@ -121,5 +170,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
         borderRadius: 10,
         paddingHorizontal: 8,
+    },
+    loadingIndicatior: {
+        flex: 1,
+        position: 'absolute',
+        left: 0,
+        top: STATUSBAR_HEIGHT,
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: "center",
+        backgroundColor: 'rgba(255,255,255,0.6)'
     }
 })

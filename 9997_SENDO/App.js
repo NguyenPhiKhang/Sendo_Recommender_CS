@@ -4,8 +4,41 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Provider, connect } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+
 
 import AppNavigator from './navigation/AppNavigator';
+
+
+function InfoUserFB(state, action) {
+  if (typeof state === 'undefined') {
+    return 0;
+  }
+  switch (action.type) {
+    case 'success':
+      state = action.data;
+      return state;
+    default:
+      return state;
+  }
+}
+
+function DataCategories(state, action){
+  if (typeof state === 'undefined') {
+    return [];
+  }
+  switch (action.type) {
+    case 'addDataCategories':
+      console.log("vaof categories");
+      state = action.data;
+      return state;
+    default:
+      return state;
+  }
+}
+
+let store = createStore(combineReducers({ dataUserFB: InfoUserFB, dataCategories: DataCategories }));
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -20,10 +53,12 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle='light-content' />}
-        <AppNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle='light-content' />}
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }
