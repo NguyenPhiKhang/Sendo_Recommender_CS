@@ -3,8 +3,7 @@
 > *Sản phẩm là kết quả của nhóm 9997 giải quyết vấn đề Recommendation System của công ty [Sendo](https://www.sendo.vn/)  khi tham gia [Developer Circles Vietnam Innovation Challenge](https://www.facebook.com/groups/hoidevcvietnam/)*
 
 ![](https://i.imgur.com/KdZfWlB.gif)  
-![](https://i.imgur.com/9D97Txs.gif)  
-![](https://i.imgur.com/eN33JYy.gif)  
+
 
 # PROBLEM
 
