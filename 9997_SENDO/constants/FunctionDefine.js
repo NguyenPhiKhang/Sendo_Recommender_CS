@@ -12,6 +12,7 @@ const ConvertCurrency = (x)=> {
 
 const renderStars = (star, size ,color='rgb(242, 201, 76)') => {
   const fields = [];
+  if(star===0) return null;
   for (let i = 0; i < 5; i++) {
     if (i < Number.parseInt(star)) {
       fields.push(

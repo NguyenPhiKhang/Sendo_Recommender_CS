@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   RefreshControl,
+  ActivityIndicator
 } from 'react-native';
 import ProgressBar from 'react-native-simple-progress-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,7 +32,7 @@ export default class HomeScreen extends React.Component {
       DataFlashSale: flashSale,
       DataProductsSeen: ProductsSeen,
       DataCategoritesNominated: CategoriesNomina,
-      DataProductsNominated: '',
+      DataProductsNominated: [],
       refreshing: false,
     }
   }
@@ -43,6 +44,7 @@ export default class HomeScreen extends React.Component {
       headerStyle: {
         backgroundColor: navigation.getParam('BackgroundColor', '#20242a'),
         //Background color of ActionBar
+        height: 60,
       },
       headerTintColor: navigation.getParam('HeaderTintColor', '#ffffff'),
       //Text color of ActionBar
@@ -78,12 +80,15 @@ export default class HomeScreen extends React.Component {
   componentDidMount = async () => {
     const response = await fetch('http://amnhac.pro/public/index');
     const jsonData = await response.json();
-    //this.setState({ DataProductsNominated: jsonData });
+
+    this.setState({ DataProductsNominated: jsonData });
+
     //console.log(this.state.DataProductsNominated);
+
     // const arr= [];
     // jsonData.map(item=>{
     //   const name = item.href.split('/');
-      
+
     //   const dataArr = await fetch(`https://mapi.sendo.vn/mob/product/search?p=1&q=${name}`);
     //   const data = dataArr['data'][0];
 
@@ -92,55 +97,64 @@ export default class HomeScreen extends React.Component {
     //console.log()
   }
 
-  onPressCategories = ()=>{
-    this.props.dispatch({type: 'addDataCategories', data: this.state.DataCategoritesNominated});
+  onPressCategories = () => {
+    this.props.dispatch({ type: 'addDataCategories', data: this.state.DataCategoritesNominated });
     this.props.navigation.navigate('Categories');
   }
 
   render() {
-    //console.log(this.state.DataFlashSale);
-    return (
-      <View style={styles.container}>
-        <ScrollView bounces={false}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh.bind(this)}
-            />}
-        >
-          <EventsCarousel images={this.state.DataEventCarousel} />
-          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', height: 50}}> */}
-          <View style={{ flexDirection: 'row', height: 30, marginHorizontal: 10, marginTop: 20, marginBottom: 5, justifyContent: 'space-between', alignItems: 'flex-end' }}>
-            <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>FlashSale</Text>
-            <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-              <Text style={{ color: 'rgba(255,255,255,0.7)' }}>8:08:08</Text>
-              <ProgressBar
-                fillStyle={{ backgroundColor: '#ec515a', height: 4 }}
-                style={{ width: 200, borderRadius: 10, height: 4, backgroundColor: 'silver', marginBottom: 5 }}
-                progress={0.8}
-              />
+    const { DataProductsNominated } = this.state;
+    //console.log(DataProductsNominated);
+    if (DataProductsNominated.length >0) {
+      return (
+        <View style={styles.container}>
+          <ScrollView bounces={false}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh.bind(this)}
+              />}
+          >
+            <EventsCarousel images={this.state.DataEventCarousel} />
+            {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', height: 50}}> */}
+            <View style={{ flexDirection: 'row', height: 30, marginHorizontal: 10, marginTop: 20, marginBottom: 5, justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>FlashSale</Text>
+              <View style={{ alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                <Text style={{ color: 'rgba(255,255,255,0.7)' }}>8:08:08</Text>
+                <ProgressBar
+                  fillStyle={{ backgroundColor: '#ec515a', height: 4 }}
+                  style={{ width: 200, borderRadius: 10, height: 4, backgroundColor: 'silver', marginBottom: 5 }}
+                  progress={0.8}
+                />
+              </View>
             </View>
-          </View>
-          <FlashSale data={this.state.DataFlashSale} />
-          <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
-            <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
-          </View>
-          <SeenProducts data={this.state.DataProductsSeen} />
-          <View style={styles.headerCategories}>
-            <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Danh mục đề cử</Text>
-            <TouchableOpacity style={{ marginRight: 10, marginTop: 5 }} onPress={this.onPressCategories}>
-              <Ionicons color='#fff' name="ios-keypad" size={25} />
-            </TouchableOpacity>
-          </View>
-          <CategoriesNominated data={this.state.DataCategoritesNominated} />
-          <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
-            <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm đề cử</Text>
-          </View>
-          <ProductsNominated datas={this.state.DataProductsNominated} navigate={this.props.navigation.navigate} />
-        </ScrollView>
-      </View>
-    )
+            <FlashSale data={this.state.DataFlashSale} />
+            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
+            </View>
+            <SeenProducts data={this.state.DataProductsSeen} />
+            <View style={styles.headerCategories}>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Danh mục đề cử</Text>
+              <TouchableOpacity style={{ marginRight: 10, marginTop: 5 }} onPress={this.onPressCategories}>
+                <Ionicons color='#fff' name="ios-keypad" size={25} />
+              </TouchableOpacity>
+            </View>
+            <CategoriesNominated data={this.state.DataCategoritesNominated} />
+            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
+              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm đề cử</Text>
+            </View>
+            <ProductsNominated datas={this.state.DataProductsNominated} navigate={this.props.navigation.navigate} />
+          </ScrollView>
+        </View>
+      )
+    }
+    else{
+      return (
+        <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+          <ActivityIndicator size="large" animating={this.state.sLoading} color='#fff' />
+        </View>);
+    }
   };
 }
 

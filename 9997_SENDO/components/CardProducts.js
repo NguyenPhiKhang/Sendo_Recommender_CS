@@ -3,19 +3,19 @@ import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Platform } f
 import {ConvertCurrency, renderStars} from '../constants/FunctionDefine';
 
 export default function CardProducts(props) {
-    const { item: { image, rating_info, price, special_price, name }, onGoToProduct } = props;
-    let minPrice = (special_price==0)?price: special_price;
-    let maxPrice = price;
-    let disPercent = 0;
+    const { item: { img_url, percent_star, final_price, promotion_percent, name }, onGoToProduct } = props;
+    // let minPrice = (special_price==0)?price: special_price;
+    // let maxPrice = price;
+    // let disPercent = 0;
 
     const DrawDiscountPercent = () => {
-        disPercent = minPrice / maxPrice;
+        // disPercent = minPrice / maxPrice;
         //console.log(minPrice);
-        if (disPercent < 1) {
+        if (promotion_percent > 0) {
             return (
                 <ImageBackground style={{ width: 32, height: 17, alignItems: 'center', justifyContent: 'center' }}
                     source={require("../assets/images/intersect.png")}>
-                    <Text style={{ color: '#fff', fontSize: 10 }}>{Math.ceil(100 - disPercent * 100)}%</Text>
+                    <Text style={{ color: '#fff', fontSize: 10 }}>{promotion_percent}%</Text>
                 </ImageBackground>
             );
         }
@@ -23,12 +23,13 @@ export default function CardProducts(props) {
     }
 
     const onPressProduct = () => {
-        onGoToProduct('DetailsProduct', { ...props.item, minPrice ,disPercent});
+        //onGoToProduct('DetailsProduct', { ...props.item, minPrice ,disPercent});
+        onGoToProduct('DetailsProduct', { ...props.item});
     }
 
     return (
         <TouchableOpacity style={styles.flashSaleContainer} onPress={onPressProduct}>
-            <ImageBackground style={styles.Background} source={{ uri: image }}
+            <ImageBackground style={styles.Background} source={{ uri: img_url }}
                 imageStyle={{
                     borderRadius: 17,
                 }}>
@@ -43,7 +44,7 @@ export default function CardProducts(props) {
                         {DrawDiscountPercent()}
                     </View>
                     <View style={{ flexDirection: "row", marginLeft: 10 }}>
-                        {renderStars(4 ,10,'red')}
+                        {renderStars(percent_star ,10,'red')}
                     </View>
                 </View>
             </ImageBackground>
@@ -51,7 +52,7 @@ export default function CardProducts(props) {
                 <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', textAlign: 'center' }}>{name}</Text>
             </View>
             <View style={styles.Vprice}>
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{ConvertCurrency(minPrice + "")}đ</Text>
+            <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{ConvertCurrency(final_price + "")}đ</Text>
             </View>
         </TouchableOpacity>
     );
@@ -61,9 +62,10 @@ const styles = StyleSheet.create({
     flashSaleContainer: {
         height: 185,
         backgroundColor: 'rgb(41,46,54)',
-        margin: 10,
+        margin: 8,
         padding: 8,
         borderRadius: 16,
+        //width: 116,
     },
     Background: {
         width: 100,

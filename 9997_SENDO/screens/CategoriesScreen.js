@@ -121,7 +121,6 @@ export default class CategoriesScreen extends Component {
       inputRange,
       outputRange
     });
-    console.log("gksdhjfgksdf");
     return <Animated.Text style={[styles.label, { color }]}>{route.title}</Animated.Text>;
     //}
   };

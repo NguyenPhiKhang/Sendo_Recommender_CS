@@ -20,7 +20,6 @@ export default class SearchScreen extends Component {
     }
 
     onSearchKey = (value) => {
-        console.log('fkahsdf');
         if (value != '') {
             this.props.navigation.navigate('ResultSearch', {valueText: this.state.textValue});
         }
