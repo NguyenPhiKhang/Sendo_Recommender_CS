@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Platform } from 'react-native';
-import {ConvertCurrency, renderStars} from '../constants/FunctionDefine';
+import {ConvertCurrency, renderStars, filterForUniqueProducts} from '../constants/FunctionDefine';
 
 export default function CardProducts(props) {
-    const { item: { img_url, percent_star, final_price, promotion_percent, name }, onGoToProduct } = props;
+    const { item: { img_url, percent_star, final_price, promotion_percent, name }, onGoToProduct, dispatch, dataSeen } = props;
     // let minPrice = (special_price==0)?price: special_price;
     // let maxPrice = price;
     // let disPercent = 0;
@@ -22,8 +22,14 @@ export default function CardProducts(props) {
         else { }
     }
 
-    const onPressProduct = () => {
-        //onGoToProduct('DetailsProduct', { ...props.item, minPrice ,disPercent});
+    const onPressProduct = async () => {
+        //console.log(props.item);
+         //const response = await
+
+        let a = props.item;
+        let b = [].concat(a);
+        let data = await filterForUniqueProducts(b.concat(dataSeen));
+        dispatch({type: 'productSeenSuccess', data: data});
         onGoToProduct('DetailsProduct', { ...props.item});
     }
 

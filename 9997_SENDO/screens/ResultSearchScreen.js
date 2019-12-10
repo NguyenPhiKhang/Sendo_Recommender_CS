@@ -79,7 +79,7 @@ export default class ResultSearchScreen extends Component {
     renderItem = ({ item }) => {
         return (
             <CardProducts item={item} key={item.id}
-                onGoToProduct={this.props.navigation.navigate} />
+                onGoToProduct={this.props.navigation.push} dispatch={this.props.dispatch}/>
         )
     }
 

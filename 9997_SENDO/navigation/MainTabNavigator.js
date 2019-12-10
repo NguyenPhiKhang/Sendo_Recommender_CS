@@ -22,11 +22,11 @@ import { Provider, connect } from 'react-redux';
 // });
 
 
-let InforUserFBHomeContainer = connect(state => ({ dataUserFB: state.dataUserFB,  }))(HomeScreen);
-let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(DetailsProductScreen);
-let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(SearchScreen);
-let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(ResultSearchScreen);
-let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataCategories: state.dataCategories }))(CategoriesScreen);
+let InforUserFBHomeContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(HomeScreen);
+let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(DetailsProductScreen);
+let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(SearchScreen);
+let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(ResultSearchScreen);
+let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(CategoriesScreen);
 
 
 const HomeStack = createStackNavigator(
@@ -69,7 +69,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 HomeStack.path = '';
 
-let InforUserFBRewardContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(RewardScreen);
+let InforUserFBRewardContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(RewardScreen);
 
 const RewardStack = createStackNavigator(
   {
@@ -90,7 +90,7 @@ RewardStack.navigationOptions = {
 RewardStack.path = '';
 
 
-let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(SettingsScreen);
+let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(SettingsScreen);
 
 const SettingsStack = createStackNavigator(
   {
@@ -110,8 +110,8 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
-let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(AccountScreen);
-let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB }))(LoginScreen);
+let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated}))(AccountScreen);
+let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(LoginScreen);
 
 const AccountStack = createStackNavigator(
   {
@@ -141,22 +141,6 @@ AccountStack.navigationOptions = ({ navigation }) => {
   }
   else return { tabBarVisible };
 };
-
-
-// const tabNavigator = createBottomTabNavigator({
-//   HomeStack,
-//   RewardStack,
-//   SettingsStack,
-//   AccountStack,
-// },
-//   {
-//     tabBarOptions: {
-//       style: { backgroundColor: "#20242a", },
-//       activeTintColor: '#ec515a',
-//     },dataUserFB
-//   }
-// );
-
 
 const tabNavigator = createMaterialBottomTabNavigator({
   HomeStack,

@@ -34,27 +34,27 @@ export default class ProductsNominated extends React.Component {
         this.state = {
             numberPage: 1,
             dataProduct: [],
-            isLoading: false,
+            isLoading: true,
         }
     }
 
     componentDidMount = async () => {
         const data = await this.props.datas;
         var dataProductRelateds = [];
+        console.log(data.length);
         await Promise.all(data.map(async (item) => {
-            // var response = await fetch(`https://mapi.sendo.vn/mob/product/${item.id}/detail/`);
-            // var jsonData = await response.json();
-            // if (typeof jsonData.length === 'undefined') {
             let searchText = await (item.name + "").replace(' ', '%20');
             let responseSearch = await fetch(`https://mapi.sendo.vn/mob/product/search?p=1&q=${searchText}`);
             let jsonSearch = await responseSearch.json();
             let productsData = await jsonSearch.data;
-            dataProductRelateds = await this.filterForUniqueProducts(dataProductRelateds.concat(productsData[0]));
-            //}
+            if (typeof productsData === 'undefined')
+                console.log("fail product Data nominated product");
+            else
+                dataProductRelateds = await this.filterForUniqueProducts(dataProductRelateds.concat(productsData[0]));
         }));
-        this.setState({ dataProduct: dataProductRelateds });
+        this.setState({ dataProduct: dataProductRelateds, isLoading: false });
     }
-    
+
     filterForUniqueProducts = async (arr) => {
         const cleaned = [];
         arr.forEach(itm => {
@@ -68,17 +68,47 @@ export default class ProductsNominated extends React.Component {
         return cleaned;
     };
 
-    componentDidUpdate = (prevProps, prevState) => {
-        // if (prevState.dataProduct == [])
-        //     this.setState({ dataProduct: this.props.datas })
-        //onsole.log(this.state.dataProduct);
+    compareProducts = async (arrPrev, arrNew) => {
+        if(arrPrev.length!=arrNew.length)
+            return false;
+        else{
+            for(var i=0;i<arrPrev.length;i++) 
+            {
+                const isEqual = JSON.stringify(arrPrev[i]) === JSON.stringify(arrNew[i]);
+                if(!isEqual) return false;
+            }
+        }
+        return true;
+      };
+
+    componentDidUpdate = async (prevProps, prevState) => {
+        console.log("---did update");
+        let isSame = await this.compareProducts(prevProps.datas, this.props.datas);
+        //this.setState({isLoading: true});
+        if (!isSame) {
+            this.setState({isLoading: true});
+            console.log('---have change');
+            const data = await this.props.datas;
+            var dataProductRelateds = [];
+            console.log(data.length);
+            await Promise.all(data.map(async (item) => {
+                let searchText = await (item.name + "").replace(' ', '%20');
+                let responseSearch = await fetch(`https://mapi.sendo.vn/mob/product/search?p=1&q=${searchText}`);
+                let jsonSearch = await responseSearch.json();
+                let productsData = await jsonSearch.data;
+                if (typeof productsData === 'undefined')
+                    console.log("fail product Data nominated product");
+                else
+                    dataProductRelateds = await this.filterForUniqueProducts(dataProductRelateds.concat(productsData[0]));
+            }));
+            this.setState({ dataProduct: dataProductRelateds, isLoading: false });
+        }
     }
 
     render() {
-        const { datas, navigate } = this.props;
+        const { datas, navigate, dispatch, dataSeen } = this.props;
         const { dataProduct, isLoading, numberPage } = this.state;
-        //console.log(dataProduct);
-        if (dataProduct.length > 0) {
+        if (!isLoading) {
             return (
                 <View style={styles.flashSaleContainer}>
                     <View style={{ width: "100%", height: 400 }}>
@@ -109,16 +139,16 @@ export default class ProductsNominated extends React.Component {
                         //scrollEventThrottle={16}
                         >
                             <View style={{ flexDirection: 'column', backgroundColor: '#20242a', justifyContent: 'center', paddingLeft: 5 }}>
-                                <View style={{ flexDirection: 'row', justifyContent:'flex-start',}}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', }}>
                                     {dataProduct.slice(0, Math.ceil(dataProduct.length / 2)).map((item, idx) => {
                                         return <CardProducts item={item} key={item.id}
-                                            onGoToProduct={navigate} />
+                                            onGoToProduct={navigate} dispatch={dispatch} dataSeen={dataSeen} />
                                     })}
                                 </View>
-                                <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                                     {dataProduct.slice(Math.ceil(dataProduct.length / 2)).map((item, idx) => {
                                         return <CardProducts item={item} key={item.id}
-                                            onGoToProduct={navigate} />
+                                            onGoToProduct={navigate} dispatch={dispatch} dataSeen={dataSeen} />
                                     })}
                                 </View>
                             </View>

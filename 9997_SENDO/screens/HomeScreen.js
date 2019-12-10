@@ -32,8 +32,9 @@ export default class HomeScreen extends React.Component {
       DataFlashSale: flashSale,
       DataProductsSeen: ProductsSeen,
       DataCategoritesNominated: CategoriesNomina,
-      DataProductsNominated: [],
+      //DataProductsNominated: [],
       refreshing: false,
+      isLoading: true,
     }
   }
 
@@ -78,23 +79,32 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount = async () => {
-    const response = await fetch('http://amnhac.pro/public/index');
-    const jsonData = await response.json();
-
-    this.setState({ DataProductsNominated: jsonData });
-
-    //console.log(this.state.DataProductsNominated);
-
-    // const arr= [];
-    // jsonData.map(item=>{
-    //   const name = item.href.split('/');
-
-    //   const dataArr = await fetch(`https://mapi.sendo.vn/mob/product/search?p=1&q=${name}`);
-    //   const data = dataArr['data'][0];
-
-    //   arr.push(item.href);
-    // });
-    //console.log()
+    await this.props.navigation.addListener ('willFocus', async () =>{
+      var jsonData = [];
+      if (this.props.dataUserLogin === 0) {
+        const response = await fetch('http://amnhac.pro/public/index');
+        jsonData = await response.json();
+        console.log('no login');
+      }
+      else {
+        console.log(this.props.dataUserLogin.id);
+        const response = await fetch('http://amnhac.pro/public/recommend', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: this.props.dataUserLogin.id,
+          }),
+        });
+        jsonData = await response.json();
+        console.log('login');
+      }
+      //this.setState({ DataProductsNominated: jsonData });
+      await this.props.dispatch({type:'dataNominatedSuccess', data: jsonData});
+      this.setState({isLoading: false});
+    })
   }
 
   onPressCategories = () => {
@@ -102,10 +112,25 @@ export default class HomeScreen extends React.Component {
     this.props.navigation.navigate('Categories');
   }
 
+  renderSeenProduct = () => {
+    //console.log(this.props.dataProductSeen);
+    if (this.props.dataProductSeen.length > 0) {
+      return (
+        <View>
+          <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
+            <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
+          </View>
+          <SeenProducts data={this.props.dataProductSeen} onGoToProduct={this.props.navigation.navigate} dispatch={this.props.dispatch}
+            dataSeen={this.props.dataProductSeen} />
+        </View>
+      )
+    }
+    return null;
+  }
+
   render() {
-    const { DataProductsNominated } = this.state;
-    //console.log(DataProductsNominated);
-    if (DataProductsNominated.length >0) {
+    //const { DataProductsNominated } = this.state;
+    if (!this.state.isLoading) {
       return (
         <View style={styles.container}>
           <ScrollView bounces={false}
@@ -130,10 +155,7 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
             <FlashSale data={this.state.DataFlashSale} />
-            <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
-              <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
-            </View>
-            <SeenProducts data={this.state.DataProductsSeen} />
+            {this.renderSeenProduct()}
             <View style={styles.headerCategories}>
               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Danh mục đề cử</Text>
               <TouchableOpacity style={{ marginRight: 10, marginRight: 16, marginTop: 2 }} onPress={this.onPressCategories}>
@@ -144,15 +166,15 @@ export default class HomeScreen extends React.Component {
             <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm đề cử</Text>
             </View>
-            <ProductsNominated datas={this.state.DataProductsNominated} navigate={this.props.navigation.navigate} />
+            <ProductsNominated datas={this.props.dataProductNominated} navigate={this.props.navigation.navigate} dispatch={this.props.dispatch} dataSeen={this.props.dataProductSeen} />
           </ScrollView>
         </View>
       )
     }
-    else{
+    else {
       return (
         <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-          <ActivityIndicator size="large" animating={this.state.sLoading} color='#fff' />
+          <ActivityIndicator size="large" animating={this.state.isLoading} color='#fff' />
         </View>);
     }
   };
