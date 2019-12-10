@@ -44,12 +44,9 @@ function DataProductSeen(state, action){
   }
   switch (action.type) {
     case 'productSeenSuccess':
-      // let a = [].concat(action.data);
-      // state = a.concat(state);
       state = action.data;
       if(state.length > 10)
         state.length = 10;
-      //console.log('data seeeeeen'+state);
       return state;
     default:
       return state;
@@ -82,8 +79,23 @@ function DataProductNominated(state, action){
   }
 }
 
+function DataSearch(state, action){
+  if (typeof state === 'undefined') {
+    return [];
+  }
+  switch (action.type) {
+    case 'dataSearchSuccess':
+      state = action.data;
+      if(state.length > 10)
+        state.length = 10;
+      return state;
+    default:
+      return state;
+  }
+}
+
 let store = createStore(combineReducers({ dataUserFB: InfoUserFB, dataCategories: DataCategories, dataProductSeen: DataProductSeen,
-                                          dataUserLogin:  DataUserLogin, dataProductNominated: DataProductNominated}));
+                                          dataUserLogin:  DataUserLogin, dataProductNominated: DataProductNominated, dataSearch: DataSearch}));
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

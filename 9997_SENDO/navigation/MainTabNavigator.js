@@ -22,11 +22,11 @@ import { Provider, connect } from 'react-redux';
 // });
 
 
-let InforUserFBHomeContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(HomeScreen);
-let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(DetailsProductScreen);
-let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(SearchScreen);
-let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(ResultSearchScreen);
-let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(CategoriesScreen);
+let InforUserFBHomeContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(HomeScreen);
+let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(DetailsProductScreen);
+let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(SearchScreen);
+let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(ResultSearchScreen);
+let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(CategoriesScreen);
 
 
 const HomeStack = createStackNavigator(
@@ -69,7 +69,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 
 HomeStack.path = '';
 
-let InforUserFBRewardContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(RewardScreen);
+let InforUserFBRewardContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(RewardScreen);
 
 const RewardStack = createStackNavigator(
   {
@@ -90,7 +90,7 @@ RewardStack.navigationOptions = {
 RewardStack.path = '';
 
 
-let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(SettingsScreen);
+let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(SettingsScreen);
 
 const SettingsStack = createStackNavigator(
   {
@@ -110,8 +110,8 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
-let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated}))(AccountScreen);
-let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated }))(LoginScreen);
+let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch}))(AccountScreen);
+let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(LoginScreen);
 
 const AccountStack = createStackNavigator(
   {
