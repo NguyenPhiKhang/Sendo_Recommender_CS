@@ -21,7 +21,7 @@ export default class SearchScreen extends Component {
 
     onSearchKey = (value) => {
         if (value != '') {
-            this.props.navigation.navigate('ResultSearch', {valueText: this.state.textValue});
+            this.props.navigation.push('ResultSearch', {valueText: this.state.textValue});
         }
     }
 

@@ -3,6 +3,8 @@ import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import CardProducts from '../components/CardProducts';
 
 export default class providerProducts extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +14,7 @@ export default class providerProducts extends Component {
     }
 
     componentDidMount = async () => {
+        this._isMounted = true;
         var dataProductRelateds = [];
         var data = this.props.data;
         await Promise.all(data.map(async (item) => {
@@ -24,13 +27,21 @@ export default class providerProducts extends Component {
                 let jsonSearch = await responseSearch.json();
                 let productsData = await jsonSearch.data;
                 //console.log(productsData);
-                dataProductRelateds = await this.filterForUniqueProducts(dataProductRelateds.concat(productsData[0]));
+                if (typeof productsData ==='undefined') {
+                    console.log("fail product Data provider");
+                }
+                else
+                    dataProductRelateds = await this.filterForUniqueProducts(dataProductRelateds.concat(productsData[0]));
             }
         }));
 
         //console.log(dataProductRelateds);
+        if(this._isMounted)
+            this.setState({ dataProvider: dataProductRelateds, isLoading: false });
+    }
 
-        this.setState({ dataProvider: dataProductRelateds, isLoading: false });
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     filterForUniqueProducts = async (arr) => {
@@ -48,7 +59,7 @@ export default class providerProducts extends Component {
 
     render() {
         const { dataProvider, isLoading } = this.state;
-        const { push } = this.props;
+        const { push, dispatch, dataSeen } = this.props;
 
         if (!isLoading) {
             return (
@@ -63,7 +74,7 @@ export default class providerProducts extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             {dataProvider.map(item => {
                                 return <CardProducts item={item} key={item.id}
-                                    onGoToProduct={push} />
+                                    onGoToProduct={push} dispatch={dispatch} dataSeen={dataSeen}/>
                             })}
                         </View>
                     </ScrollView>

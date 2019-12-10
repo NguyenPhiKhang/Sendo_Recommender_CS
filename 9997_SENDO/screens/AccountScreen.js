@@ -19,8 +19,10 @@ export default class AccountScreen extends Component {
     }
     else return <Image source={{ uri: dataUserFB.picture.data.url }} style={{ width: 150, height: 150, borderRadius: 75 }} />
   }
-  checkHideShowLogin = (dataUserFB) => {
-    if (dataUserFB === 0) {
+  checkHideShowLogin = (dataUserFB, dataUserLogin) => {
+    // console.log(dataUserFB);
+    // console.log(dataUserLogin);
+    if (dataUserFB === 0&&dataUserLogin===0) {
       return (
         <View style={{ alignItems: 'center', paddingTop: 135, justifyContent:'center' }}>
           <TouchableOpacity style={styles.btnLogOI} onPress={() => { this.props.navigation.navigate('Login') }}>
@@ -33,6 +35,8 @@ export default class AccountScreen extends Component {
       );
     }
     else {
+      if(dataUserFB!==0)
+      {
       return (
         <View style={{ alignItems: 'center', paddingTop: 135, justifyContent:'center' }}>
           <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>{dataUserFB.name}</Text>
@@ -42,12 +46,24 @@ export default class AccountScreen extends Component {
           </TouchableOpacity>
         </View>
       );
+      }
+      else{
+        return(
+        <View style={{ alignItems: 'center', paddingTop: 135, justifyContent:'center' }}>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>{dataUserLogin.id}</Text>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>{dataUserLogin.email}</Text>
+          <TouchableOpacity style={styles.btnLogOI} onPress={() => { this.props.dispatch({type: 200, data: 0})}}>
+            <Text style={{ color: 'rgb(26, 188, 254)', fontSize: 20, fontWeight: 'bold' }}>Đăng xuất</Text>
+          </TouchableOpacity>
+        </View>
+        )
+      }
     }
 
   }
 
   render() {
-    const { dataUserFB } = this.props;
+    const { dataUserFB, dataUserLogin } = this.props;
     return (
       <View style={styles.container}>
         <View style={{ backgroundColor: 'rgb(41, 46, 54)', height: 120, paddingTop: STATUSBAR_HEIGHT + 10, alignItems: 'center' }}>
@@ -63,7 +79,7 @@ export default class AccountScreen extends Component {
             }
           </View>
         </View>
-        {this.checkHideShowLogin(dataUserFB)}
+        {this.checkHideShowLogin(dataUserFB, dataUserLogin)}
       </View>
     );
   }

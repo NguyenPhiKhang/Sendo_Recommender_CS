@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, NativeModules, Platform, ActivityIndicator } from 'react-native';
+import { View, Image, Text, StyleSheet, KeyboardAvoidingView, TouchableOpacity, NativeModules, Platform, ActivityIndicator, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 import * as Facebook from 'expo-facebook';
@@ -21,7 +21,7 @@ export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textUser: '',
+            textUser: '0084FDDDFD25C812292B673906484C8C',
             isLoading: false,
         };
     }
@@ -34,8 +34,8 @@ export default class LoginScreen extends Component {
             } = await Facebook.logInWithReadPermissionsAsync('544644536088007', {
                 permissions: ['public_profile', 'email'],
             });
-            console.log(type);
-            console.log(token);
+            // console.log(type);
+            // console.log(token);
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
                 // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.type(large)`);
@@ -67,6 +67,7 @@ export default class LoginScreen extends Component {
     }
 
     onPressLogin = async () => {
+        this.setState({ isLoading: true })
         const response = await fetch('http://amnhac.pro/public/login', {
             method: 'POST',
             headers: {
@@ -79,7 +80,30 @@ export default class LoginScreen extends Component {
             }),
         });
         const status = await response.json();
-        console.log(status);
+        if (status.status === 200) {
+            await this.props.dispatch({ type: status.status, data: status.info });
+            // const responsesss = await fetch('http://amnhac.pro/public/recommend', {
+            //     method: 'POST',
+            //     headers: {
+            //         Accept: 'application/json',
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //         user_id: this.props.dataUserLogin.id,
+            //     }),
+            // });
+            // jsonData = await responsesss.json();
+            // jsonData.length = await 6;
+            // console.log('login');
+
+            // await this.props.dispatch({type:'dataNominatedSuccess', data: jsonData});
+            //await this.props.navigation.push('Home');
+            await this.props.navigation.navigate('Account');
+        }
+        else {
+            Alert.alert("Sai tài khoản!!!");
+        }
+        this.setState({ isLoading: false });
     }
 
     render() {
@@ -105,14 +129,15 @@ export default class LoginScreen extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             onSubmitEditing={() => this.passwordInput.focus()}
-                            onChangeText={(text) => this.setState({ textUser: text })} />
+                            onChangeText={(text) => this.setState({ textUser: text })}
+                            value={this.state.textUser} />
                         <TextInput
                             style={styles.input}
                             placeholder='Mật khẩu'
                             placeholderTextColor='rgba(255,0,0,0.5)'
                             returnKeyType='go'
                             secureTextEntry
-                            ref={input => this.passwordInput = input} />
+                            ref={input => this.passwordInput = input}/>
                         <TouchableOpacity style={[styles.input, { backgroundColor: '#D03627', alignItems: 'center', justifyContent: 'center' }]} onPress={this.onPressLogin}>
                             <Text style={{ color: '#fff', fontSize: 25 }}>Đăng Nhập</Text>
                         </TouchableOpacity>

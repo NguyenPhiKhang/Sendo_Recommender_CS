@@ -30,7 +30,6 @@ function DataCategories(state, action){
   }
   switch (action.type) {
     case 'addDataCategories':
-      console.log("vaof categories");
       state = action.data;
       return state;
     default:
@@ -38,7 +37,53 @@ function DataCategories(state, action){
   }
 }
 
-let store = createStore(combineReducers({ dataUserFB: InfoUserFB, dataCategories: DataCategories }));
+function DataProductSeen(state, action){
+  if (typeof state === 'undefined') {
+    //console.log(state+'data seeeeeennnn');
+    return [];
+  }
+  switch (action.type) {
+    case 'productSeenSuccess':
+      // let a = [].concat(action.data);
+      // state = a.concat(state);
+      state = action.data;
+      if(state.length > 10)
+        state.length = 10;
+      //console.log('data seeeeeen'+state);
+      return state;
+    default:
+      return state;
+  }
+}
+
+function DataUserLogin(state, action){
+  if (typeof state === 'undefined') {
+    return 0;
+  }
+  switch (action.type) {
+    case 200:
+      state = action.data;
+      return state;
+    default:
+      return state;
+  }
+}
+
+function DataProductNominated(state, action){
+  if (typeof state === 'undefined') {
+    return [];
+  }
+  switch (action.type) {
+    case 'dataNominatedSuccess':
+      state = action.data;
+      return state;
+    default:
+      return state;
+  }
+}
+
+let store = createStore(combineReducers({ dataUserFB: InfoUserFB, dataCategories: DataCategories, dataProductSeen: DataProductSeen,
+                                          dataUserLogin:  DataUserLogin, dataProductNominated: DataProductNominated}));
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

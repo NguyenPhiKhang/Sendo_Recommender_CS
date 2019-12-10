@@ -17,7 +17,7 @@ const DEVICE_WIDTH = Dimensions.get("window").width;
 
 const ImageError = require('../assets/images/errorimage.png');
 
-const listProducts = (data, navigate) => {
+const listProducts = (data, navigate, dataSeen) => {
   //const { data, navigate } = props;
   return (
     <View style={{ flex: 1 }}>
@@ -31,7 +31,7 @@ const listProducts = (data, navigate) => {
         <View style={{ flexDirection: 'row' }}>
           {data.map(item => {
             return <CardProducts item={item} key={item.id}
-              onGoToProduct={navigate} />
+              onGoToProduct={navigate} dataSeen={dataSeen}/>
           })}
         </View>
       </ScrollView>
@@ -41,14 +41,16 @@ const listProducts = (data, navigate) => {
 
 export default class DetailsProductScreen extends React.Component {
 
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
       selectedIndex: 1,
       totalImage: 0,
-      DataProductsSeen: ProductsSeen,
-      DataProductsProvider: ProductsNomina,
-      DataProductsNominated: ProductsNomina,
+      // DataProductsSeen: ProductsSeen,
+      // DataProductsProvider: ProductsNomina,
+      // DataProductsNominated: ProductsNomina,
       detailProduct: {},
       isLoading: true,
       dataProductRelateds: [],
@@ -91,14 +93,14 @@ export default class DetailsProductScreen extends React.Component {
   };
 
   componentDidMount = async () => {
-    //this.setState({ isLoading: true })
+    this._isMounted = true;
     const id = await this.props.navigation.state.params.id;
     const responseDetail = await fetch(`https://mapi.sendo.vn/mob/product/${id}/detail/`);
     const jsonDataDetail = await responseDetail.json();
     const product_relateds = await jsonDataDetail.product_relateds;
     var arrIDRelateds = await product_relateds.split(',');
-    //ar dataProductRelateds = await this.getDataSearch(arrIDRelateds);
-    this.setState({ detailProduct: jsonDataDetail, totalImage: jsonDataDetail.images.length, isLoading: false, dataProductProvider: arrIDRelateds });
+    if(this._isMounted)
+      this.setState({ detailProduct: jsonDataDetail, totalImage: jsonDataDetail.images.length, isLoading: false, dataProductProvider: arrIDRelateds });
   }
 
   setSelectedIndex = event => {
@@ -108,6 +110,15 @@ export default class DetailsProductScreen extends React.Component {
     const contentOffset = event.nativeEvent.contentOffset.x;
     const selectedIndex = Math.floor(contentOffset / viewSize) + 1;
     this.setState({ selectedIndex });
+  }
+
+  componentWillUnmount() {
+    //clearInterval(this.interval);
+    this._isMounted = false;
+  }
+
+  onGoBack=()=>{
+    this.props.navigation.navigate('Home');
   }
 
   render() {
@@ -150,7 +161,7 @@ export default class DetailsProductScreen extends React.Component {
             </ScrollView>
             <View style={styles.btnOnTopImage}>
               <TouchableOpacity style={{ width: 30, height: 30, justifyContent: 'center' }}
-                onPress={() => { this.props.navigation.goBack(); }}>
+                onPress={this.onGoBack}>
                 <Ionicons color='#fff' name='ios-arrow-back' size={30} />
               </TouchableOpacity>
               <View style={{ flexDirection: 'row', marginRight: 10, }}>
@@ -293,18 +304,18 @@ export default class DetailsProductScreen extends React.Component {
             </View>
             <View style={{ width: '100%', height: 230, paddingHorizontal: 15, marginTop: 30 }}>
               <Text style={{ color: '#fff', fontSize: 20, fontWeight: '500' }}>Sản phẩm cùng nhà cung cấp</Text>
-              <ProviderProducts data={this.state.dataProductProvider} push={this.props.navigation.push} />
+              <ProviderProducts data={this.state.dataProductProvider} push={this.props.navigation.push} dispatch={this.props.dispatch} dataSeen={this.props.dataProductSeen}/>
             </View>
             <View style={{ width: '100%', height: 230, paddingHorizontal: 15, marginTop: 20 }}>
               <Text style={{ color: '#fff', fontSize: 20, fontWeight: '500' }}>Sản phẩm đề cử</Text>
               {/* {listProducts(this.state.DataProductsNominated, this.props.navigation.navigate)} */}
-              <ProductsOneLine idProduct={id} />
+              <ProductsOneLine idProduct={id} push={this.props.navigation.push} dispatch={this.props.dispatch} dataSeen={this.props.dataProductSeen} dataLogin={this.props.dataUserLogin}/>
             </View>
             <View style={{ marginTop: 20, marginLeft: 5 }}>
               <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
                 <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm vừa xem</Text>
               </View>
-              <SeenProducts data={this.state.DataProductsSeen}/>
+              <SeenProducts data={this.props.dataProductSeen} onGoToProduct={this.props.navigation.push} dispatch={this.props.dispatch} dataSeen={this.props.dataProductSeen}/>
             </View>
           </ScrollView>
           <View style={styles.viewBuy}>
