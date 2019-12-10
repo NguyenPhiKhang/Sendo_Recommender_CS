@@ -281,11 +281,11 @@ export default class DetailsProductScreen extends React.Component {
                 <Text style={{ color: '#fff', fontSize: 20 }}>{percent_star}/5</Text>
                 <Text style={{ color: 'rgb(199, 199, 204)', marginLeft: 15 }}>{total_rated} đánh giá</Text>
               </View>
-              <View style={{ flexDirection: 'row', flex: 1 }}>
+              <View style={{ flexDirection: 'row', flex: 1, marginTop: 10 }}>
                 <Image style={{ height: 65, flex: 0.18 }} source={require('../assets/images/avatar.png')} />
                 <View style={{ marginLeft: 10, flex: 0.62 }}>
                   <Text style={{ color: '#fff', fontSize: 18, fontWeight: '500' }}>Duy Anh</Text>
-                  <View style={{ flexDirection: "row" }}>{renderStars(5)}</View>
+                  <View style={{ flexDirection: "row", marginBottom: 8 }}>{renderStars(5)}</View>
                   <Text style={{ color: '#fff', fontWeight: '400' }}>Sản phẩn dịch vụ giống mô tả và tốt hơn mong đợi. Chất lượng sản phẩn tuyệt vời.</Text>
                 </View>
                 <Text style={{ fontSize: 10, color: 'rgb(199, 199, 204)', flex: 0.2 }}>3 tháng trước</Text>
@@ -377,12 +377,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    //padding: 10,
     position: 'absolute',
     top: 0,
     left: 0,
     width: DEVICE_WIDTH,
-    height: 60,
+    height: 48,
     paddingTop: 5,
     paddingHorizontal: 15,
     borderColor: 'white',

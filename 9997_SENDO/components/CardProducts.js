@@ -44,15 +44,15 @@ export default function CardProducts(props) {
                         {DrawDiscountPercent()}
                     </View>
                     <View style={{ flexDirection: "row", marginLeft: 10 }}>
-                        {renderStars(percent_star ,10,'red')}
+                        {renderStars(percent_star ,16,'yellow')}
                     </View>
                 </View>
             </ImageBackground>
             <View style={styles.VName}>
-                <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', textAlign: 'center' }}>{name}</Text>
+                <Text style={{ color: "#fff", fontSize: 13, fontWeight: '300', textAlign: 'center' }}>{name}</Text>
             </View>
             <View style={styles.Vprice}>
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: 'bold' }}>{ConvertCurrency(final_price + "")}đ</Text>
+            <Text style={{ color: "#fff", fontSize: 15, fontWeight: 'bold' }}>{ConvertCurrency(final_price + "")}đ</Text>
             </View>
         </TouchableOpacity>
     );

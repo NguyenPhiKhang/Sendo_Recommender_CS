@@ -1,0 +1,1080 @@
+{
+  "thoi-trang-nu": [
+    {
+      "name": "Đầm váy",
+      "detail": [
+        {
+          "name": "Đầm xoè",
+          "img": "https://i.imgur.com/gHQB6zR.png",
+          "id": "dam-xoe"
+        },
+        {
+          "name": "Đầm suông",
+          "img": "https://i.imgur.com/2AjIPjF.png",
+          "id": "dam-suong"
+        },
+        {
+          "name": "Đầm ôm",
+          "img": "https://i.imgur.com/IeUqhv3.png",
+          "id": "dam-om"
+        },
+        {
+          "name": "Đầm dạ hội dự tiệc",
+          "img": "https://i.imgur.com/xfjB8Th.png",
+          "id": "dam-da-hoi-du-tiec"
+        },
+        {
+          "name": "Đầm maxi",
+          "img": "https://i.imgur.com/p7G7kMA.png",
+          "id": "dam-maxi"
+        },
+        {
+          "name": "Đầm thun",
+          "img": "https://i.imgur.com/5vyogIm.png",
+          "id": "dam-thun"
+        },
+        {
+          "name": "Đầm ren",
+          "img": "https://i.imgur.com/lCO4m3W.png",
+          "id": "dam-ren"
+        },
+        {
+          "name": "Đầm voan chiffon",
+          "img": "https://i.imgur.com/3tOjU64.png",
+          "id": "dam-voan-chiffon"
+        },
+        {
+          "name": "Đầm công sở",
+          "img": "https://i.imgur.com/OsIG2Lu.png",
+          "id": "dam-cong-so"
+        },
+        {
+          "name": "Đầm trễ vai",
+          "img": "https://i.imgur.com/DKygMps.png",
+          "id": "dam-tre-vai"
+        },
+        {
+          "name": "Đầm đuôi cá",
+          "img": "https://i.imgur.com/HpVWHwC.png",
+          "id": "dam-duoi-ca"
+        },
+        {
+          "name": "Đầm sơ mi",
+          "img": "https://i.imgur.com/0f0sNGO.png",
+          "id": "dam-so-mi"
+        },
+        {
+          "name": "Đầm denim",
+          "img": "https://i.imgur.com/eoFsLJc.png",
+          "id": "dam-denim"
+        },
+        {
+          "name": "Đầm len",
+          "img": "https://i.imgur.com/MlWRtbH.png",
+          "id": "dam-len"
+        },
+        {
+          "name": "Đầm xếp ly",
+          "img": "https://i.imgur.com/bhQgGXx.png",
+          "id": "dam-xep-ly"
+        }
+      ],
+      "id": "dam-vay"
+    },
+    {
+      "name": "Áo nữ",
+      "detail": [
+        {
+          "name": "Áo thun poli nữ",
+          "img": "",
+          "id": "ao-thun-poli-nu"
+        },
+        {
+          "name": "Áo kiểu nữ",
+          "img": "",
+          "id": "ao-kieu-nu"
+        },
+        {
+          "name": "Áo sơ mi nữ",
+          "img": "",
+          "id": "ao-so-mi-nu"
+        },
+        {
+          "name": "Áo len",
+          "img": "",
+          "id": "ao-len"
+        },
+        {
+          "name": "Áo hoodie nữ",
+          "img": "",
+          "id": "ao-hoodie-nu"
+        },
+        {
+          "name": "Áo dài nữ",
+          "img": "",
+          "id": "ao-dai-nu"
+        },
+        {
+          "name": "Áo croptop nữ",
+          "img": "",
+          "id": "ao-croptop-nu"
+        },
+        {
+          "name": "Áo voan chiffon",
+          "img": "",
+          "id": "ao-voan-chiffon"
+        },
+        {
+          "name": "Áo hai dây",
+          "img": "",
+          "id": "ao-hai-day"
+        }
+      ],
+      "id": "ao-nu"
+    },
+    {
+      "name": "Set bộ jumsuit",
+      "detail": [
+        {
+          "name": "Set áo và quần dài",
+          "img": "",
+          "id": "set-ao-va-quan-dai"
+        },
+        {
+          "name": "Set áo và chân váy",
+          "img": "",
+          "id": "set-ao-va-chan-vay"
+        },
+        {
+          "name": "Đồ bay jumpsuit",
+          "img": "",
+          "id": "do-bay-jumpsuit"
+        },
+        {
+          "name": "Áo và quần ngắn",
+          "img": "",
+          "id": "ao-va-quan-ngan"
+        },
+        {
+          "name": "Áo và quần lửng",
+          "img": "",
+          "id": "ao-va-quan-lung"
+        },
+        {
+          "name": "Set áo và quần ống rộng",
+          "img": "",
+          "id": "set-ao-va-quan-ong-rong"
+        },
+        {
+          "name": "Bộ áo vest và quần dài",
+          "img": "",
+          "id": "bo-ao-vest-va-quan-dai"
+        },
+        {
+          "name": "Bộ áo vest và chân váy",
+          "img": "",
+          "id": "bo-ao-vest-va-chan-vay"
+        },
+        {
+          "name": "Bộ áo vest và quần ngắn",
+          "img": "",
+          "id": "bo-ao-vest-va-quan-ngan"
+        }
+      ],
+      "id": "set-bo-jumsuit"
+    },
+    {
+      "name": "Áo khoác nữ",
+      "detail": [
+        {
+          "name": "Áo khoác chống nắng nữ",
+          "img": "",
+          "id": "ao-khoac-chong-nang-nu"
+        },
+        {
+          "name": "Áo khoác kiểu nữ",
+          "img": "",
+          "id": "ao-khoac-kieu-nu"
+        },
+        {
+          "name": "Áo khoác jean nữ",
+          "img": "",
+          "id": "ao-khoac-jean-nu"
+        },
+        {
+          "name": "Áo khoác phao nữ",
+          "img": "",
+          "id": "ao-khoac-phao-nu"
+        },
+        {
+          "name": "Áo khoác dạ",
+          "img": "",
+          "id": "ao-khoac-da"
+        },
+        {
+          "name": "Áo khoác len",
+          "img": "",
+          "id": "ao-khoac-len"
+        },
+        {
+          "name": "Áo khoác vest",
+          "img": "",
+          "id": "ao-khoac-vest"
+        },
+        {
+          "name": "Áo khoác da nữ",
+          "img": "",
+          "id": "ao-khoac-da-nu"
+        },
+        {
+          "name": "Áo khoác bomber nữ",
+          "img": "",
+          "id": "ao-khoac-bomber-nu"
+        }
+      ],
+      "id": "ao-khoac-nu"
+    },
+    {
+      "name": "Đồ lót nữ",
+      "detail": [
+        {
+          "name": "Quần lót nữ",
+          "img": "",
+          "id": "quan-lot-nu"
+        },
+        {
+          "name": "Áo ngực",
+          "img": "",
+          "id": "ao-nguc"
+        },
+        {
+          "name": "Đồ lót định hình",
+          "img": "",
+          "id": "do-lot-dinh-hinh"
+        },
+        {
+          "name": "Bralette",
+          "img": "",
+          "id": "bralette"
+        },
+        {
+          "name": "Bộ đồ lót nữ",
+          "img": "",
+          "id": "bo-do-lot-nu"
+        },
+        {
+          "name": "Áo ngực dán",
+          "img": "",
+          "id": "ao-nguc-dan"
+        },
+        {
+          "name": "Phụ kiện đồ lót",
+          "img": "",
+          "id": "phu-kien-do-lot"
+        }
+      ],
+      "id": "do-lot-nu"
+    },
+    {
+      "name": "Quần nữ",
+      "detail": [
+        {
+          "name": "Quần jean nữ",
+          "img": "",
+          "id": "quan-jean-nu"
+        },
+        {
+          "name": "Quần short nữ",
+          "img": "",
+          "id": "quan-short-nu"
+        },
+        {
+          "name": "Quần baggy",
+          "img": "",
+          "id": "quan-baggy"
+        },
+        {
+          "name": "Quần legging nữ",
+          "img": "",
+          "id": "quan-legging-nu"
+        },
+        {
+          "name": "Quần ống rộng",
+          "img": "",
+          "id": "quan-ong-rong"
+        },
+        {
+          "name": "Quần tây nữ",
+          "img": "",
+          "id": "quan-tay-nu"
+        },
+        {
+          "name": "Quần kaki nữ",
+          "img": "",
+          "id": "quan-kaki-nu"
+        },
+        {
+          "name": "Quần yếm nữ",
+          "img": "",
+          "id": "quan-yem-nu"
+        },
+        {
+          "name": "Quần lửng nữ",
+          "img": "",
+          "id": "quan-lung-nu"
+        }
+      ],
+      "id": "quan-nu"
+    },
+    {
+      "name": "Đồ mặc nhà đồ ngủ",
+      "detail": [
+        {
+          "name": "Đồ bộ pijama nữ",
+          "img": "",
+          "id": "do-bo-pijama-nu"
+        },
+        {
+          "name": "Đầm ngủ váy ngủ",
+          "img": "",
+          "id": "dam-ngu-vay-ngu"
+        },
+        {
+          "name": "Áo choàng ngủ",
+          "img": "",
+          "id": "ao-choang-ngu"
+        },
+        {
+          "name": "Đồ ngủ costplay",
+          "img": "",
+          "id": "do-ngu-costplay"
+        }
+      ],
+      "id": "do-mac-nha-do-ngu"
+    },
+    {
+      "name": "Chân váy",
+      "detail": [
+        {
+          "name": "Chân váy jean",
+          "img": "",
+          "id": "chan-vay-jean"
+        },
+        {
+          "name": "Chân váy chữ A",
+          "img": "",
+          "id": "chan-vay-chu-a"
+        },
+        {
+          "name": "Chân váy xoè tròn",
+          "img": "",
+          "id": "chan-vay-xoe-tron"
+        }
+      ],
+      "id": "chan-vay"
+    },
+    {
+      "name": "Đồ bơi đồ đi biển",
+      "detail": [
+        {
+          "name": "Bộ đồ bơi",
+          "img": "",
+          "id": "bo-do-boi"
+        },
+        {
+          "name": "Quần áo khoác ngoài đi biển",
+          "img": "",
+          "id": "quan-ao-khoac-ngoai-di-bien"
+        },
+        {
+          "name": "Áo bơi nữ lẻ",
+          "img": "",
+          "id": "ao-boi-nu-le"
+        },
+        {
+          "name": "Quần bơi nữ lẻ",
+          "img": "",
+          "id": "quan-boi-nu-le"
+        },
+        {
+          "name": "Đồ bơi, đồ đi biển khác",
+          "img": "",
+          "id": "do-boi-do-di-bien-khac"
+        }
+      ],
+      "id": "do-boi-do-di-bien"
+    },
+    {
+      "name": "Đồ đôi nam nữ",
+      "detail": [
+        {
+          "name": "Áo thun cặp",
+          "img": "",
+          "id": "ao-thun-cap"
+        },
+        {
+          "name": "Áo khoác cặp",
+          "img": "",
+          "id": "ao-khoac-cap"
+        },
+        {
+          "name": "Áo sơ mi cặp",
+          "img": "",
+          "id": "ao-so-mi-cap"
+        },
+        {
+          "name": "Set đồ đôi nam nữ",
+          "img": "",
+          "id": "set-do-doi-nam-nu"
+        },
+        {
+          "name": "Quần cặp",
+          "img": "",
+          "id": "quan-cap"
+        }
+      ],
+      "id": "do-doi-nam-nu"
+    },
+    {
+      "name": "Quần áo thể thao nữ",
+      "detail": [
+        {
+          "name": "Bộ quần áo thể thao",
+          "img": "",
+          "id": "bo-quan-ao-the-thao"
+        },
+        {
+          "name": "Quần thể thao nữ",
+          "img": "",
+          "id": "quan-the-thao-nu"
+        },
+        {
+          "name": "Áo thể thao nữ",
+          "img": "",
+          "id": "ao-the-thao-nu"
+        },
+        {
+          "name": "Áo khoác thể thao nữ",
+          "img": "",
+          "id": "ao-khoac-the-thao-nu"
+        },
+        {
+          "name": "Áo ngực thể thao",
+          "img": "",
+          "id": "ao-nguc-the-thao"
+        },
+        {
+          "name": "Váy thể thao",
+          "img": "",
+          "id": "vay-the-thao"
+        },
+        {
+          "name": "Đầm thể thao",
+          "img": "",
+          "id": "dam-the-thao"
+        }
+      ],
+      "id": "quan-ao-the-thao-nu"
+    },
+    {
+      "name": "Thời trang trung niên",
+      "detail": [
+        {
+          "name": "Đầm trung niên",
+          "img": "",
+          "id": "dam-trung-nien"
+        },
+        {
+          "name": "Áo nữ trung niên",
+          "img": "",
+          "id": "ao-nu-trung-nien"
+        },
+        {
+          "name": "Đồ mặc nhà đồ mặc ngủ trung niên",
+          "img": "",
+          "id": "do-mac-nha-do-mac-ngu-trung-nien"
+        },
+        {
+          "name": "Quần nữ trung niên",
+          "img": "",
+          "id": "quan-nu-trung-nien"
+        },
+        {
+          "name": "Thời trang nữ trung niên khác",
+          "img": "",
+          "id": "thoi-trang-nu-trung-nien-khac"
+        }
+      ],
+      "id": "thoi-trang-trung-nien"
+    }
+  ],
+  "thoi-trang-nam": [
+    {
+      "name": "Áo thun áo polo nam",
+      "detail": [
+        {
+          "name": "Áo thun ngắn tay",
+          "img": "",
+          "id": "ao-thun-ngan-tay"
+        },
+        {
+          "name": "Áo polo nam",
+          "img": "",
+          "id": "ao-polo-nam"
+        },
+        {
+          "name": "Áo thun dài tay",
+          "img": "",
+          "id": "ao-thun-dai-tay"
+        },
+        {
+          "name": "Áo hoodie nam",
+          "img": "",
+          "id": "ao-hoodie-nam"
+        },
+        {
+          "name": "Áo len áo lạnh",
+          "img": "",
+          "id": "ao-len-ao-lanh"
+        },
+        {
+          "name": "Áo thun 3 lỗ",
+          "img": "",
+          "id": "ao-thun-3-lo"
+        }
+      ],
+      "id": "ao-thun-ao-polo-nam"
+    },
+    {
+      "name": "Áo sơ mi nam",
+      "detail": [
+        {
+          "name": "Áo sơ mi nam trơn",
+          "img": "",
+          "id": "ao-so-mi-nam-tron"
+        },
+        {
+          "name": "Áo sơ mi nam kẻ sọc",
+          "img": "",
+          "id": "ao-so-mi-nam-ke-soc"
+        },
+        {
+          "name": "Áo sơ mi nam ca rô",
+          "img": "",
+          "id": "ao-so-mi-nam-ca-ro"
+        },
+        {
+          "name": "Áo sơ mi nam chấm bi",
+          "img": "",
+          "id": "ao-so-mi-nam-cham-bi"
+        },
+        {
+          "name": "Áo sơ mi nam denim",
+          "img": "",
+          "id": "ao-so-mi-nam-denim"
+        },
+        {
+          "name": "Áo sơ mi nam hoạ tiết khác",
+          "img": "",
+          "id": "ao-so-mi-nam-hoa-tiet-khac"
+        }
+      ],
+      "id": "ao-so-mi-nam"
+    },
+    {
+      "name": "Áo khoác nam",
+      "detail": [
+        {
+          "name": "Áo khoác dù nam",
+          "img": "",
+          "id": "ao-khoac-du-nam"
+        },
+        {
+          "name": "Áo khoác nỉ nam",
+          "img": "",
+          "id": "ao-khoac-ni-nam"
+        },
+        {
+          "name": "Áo khoác kaki nam",
+          "img": "",
+          "id": "ao-khoac-kaki-nam"
+        },
+        {
+          "name": "Áo khoác jean nam",
+          "img": "",
+          "id": "ao-khoac-jean-nam"
+        },
+        {
+          "name": "Áo khoác chống nắng cho nam",
+          "img": "",
+          "id": "ao-khoac-chong-nang-cho-nam"
+        },
+        {
+          "name": "Áo khoác da nam",
+          "img": "",
+          "id": "ao-khoac-da-nam"
+        },
+        {
+          "name": "Áo khoác phao nam",
+          "img": "",
+          "id": "ao-khoac-phao-nam"
+        },
+        {
+          "name": "Áo khoác len nam",
+          "img": "",
+          "id": "ao-khoac-len-nam"
+        }
+      ],
+      "id": "ao-khoac-nam"
+    },
+    {
+      "name": "Quần jeans nam",
+      "detail": [
+        {
+          "name": "Quần jeans ống côn skinny",
+          "img": "",
+          "id": "quan-jeans-ong-con-skinny"
+        },
+        {
+          "name": "Quần jeans ống suông",
+          "img": "",
+          "id": "quan-jeans-ong-suong"
+        },
+        {
+          "name": "Quần jeans name khác",
+          "img": "",
+          "id": "quan-jeans-name-khac"
+        }
+      ],
+      "id": "quan-jeans-nam"
+    },
+    {
+      "name": "Quần dài nam",
+      "detail": [
+        {
+          "name": "Quần kaki nam",
+          "img": "",
+          "id": "quan-kaki-nam"
+        },
+        {
+          "name": "Quần tây nam",
+          "img": "",
+          "id": "quan-tay-nam"
+        },
+        {
+          "name": "Quần jogger nam",
+          "img": "",
+          "id": "quan-jogger-nam"
+        },
+        {
+          "name": "Quần leggings nam",
+          "img": "",
+          "id": "quan-leggings-nam"
+        },
+        {
+          "name": "Quần đáy thụng nam",
+          "img": "",
+          "id": "quan-day-thung-nam"
+        },
+        {
+          "name": "Quần dài nam khác",
+          "img": "",
+          "id": "quan-dai-nam-khac"
+        }
+      ],
+      "id": "quan-dai-nam"
+    },
+    {
+      "name": "Quần short nam",
+      "detail": [
+        {
+          "name": "Quần shorts jeans",
+          "img": "",
+          "id": "quan-shorts-jeans"
+        },
+        {
+          "name": "Quần shorts kaki",
+          "img": "",
+          "id": "quan-shorts-kaki"
+        },
+        {
+          "name": "Quần shorts thun",
+          "img": "",
+          "id": "quan-shorts-thun"
+        },
+        {
+          "name": "Quần shorts dù",
+          "img": "",
+          "id": "quan-shorts-du"
+        },
+        {
+          "name": "Quần shorts khác",
+          "img": "",
+          "id": "quan-shorts-khac"
+        }
+      ],
+      "id": "quan-short-nam"
+    },
+    {
+      "name": "Áo thể thao nam",
+      "detail": [
+        {
+          "name": "Bộ quần áo thể thao nam",
+          "img": "",
+          "id": "bo-quan-ao-the-thao-nam"
+        },
+        {
+          "name": "Quần thể thao tập gym",
+          "img": "",
+          "id": "quan-the-thao-tap-gym"
+        },
+        {
+          "name": "Áo thể thao tập gym",
+          "img": "",
+          "id": "ao-the-thao-tap-gym"
+        },
+        {
+          "name": "Quần bơi nam",
+          "img": "",
+          "id": "quan-boi-nam"
+        },
+        {
+          "name": "Áo khoác thể thao nam",
+          "img": "",
+          "id": "ao-khoac-the-thao-nam"
+        }
+      ],
+      "id": "ao-the-thao-nam"
+    },
+    {
+      "name": "Áo vest, blazer",
+      "detail": [
+        {
+          "name": "Áo vest nam",
+          "img": "",
+          "id": "ao-vest-nam"
+        },
+        {
+          "name": "Bộ đồ vest nam",
+          "img": "",
+          "id": "bo-do-vest-nam"
+        },
+        {
+          "name": "Áo ghi lê nam",
+          "img": "",
+          "id": "ao-ghi-le-nam"
+        },
+        {
+          "name": "Áo blazer nam",
+          "img": "",
+          "id": "ao-blazer-nam"
+        }
+      ],
+      "id": "ao-vest-blazer"
+    }
+  ],
+  "suc-khoe-lam-dep": [
+    {
+      "name": "Dưỡng da mặt",
+      "detail": [
+        {
+          "name": "Kem dưỡng da",
+          "img": "",
+          "id": "kem-duong-da"
+        },
+        {
+          "name": "Kem chống nắng",
+          "img": "",
+          "id": "kem-chong-nang"
+        },
+        {
+          "name": "Bộ mỹ phẩm chăm sóc da",
+          "img": "",
+          "id": "bo-my-pham-cham-soc-da"
+        },
+        {
+          "name": "Kem làm trắng",
+          "img": "",
+          "id": "kem-lam-trang"
+        },
+        {
+          "name": "Xịt khoáng",
+          "img": "",
+          "id": "xit-khoang"
+        },
+        {
+          "name": "Gel dưỡng da",
+          "img": "",
+          "id": "gel-duong-da"
+        },
+        {
+          "name": "Dưỡng vùng mắt",
+          "img": "",
+          "id": "duong-vung-mat"
+        },
+        {
+          "name": "Kem dưỡng ẩm",
+          "img": "",
+          "id": "kem-duong-am"
+        },
+        {
+          "name": "Dưỡng da mặt khác",
+          "img": "",
+          "id": "duong-da-mat-khac"
+        }
+      ],
+      "id": "duong-da-mat"
+    },
+    {
+      "name": "Trang điểm môi",
+      "detail": [
+        {
+          "name": "Son lì",
+          "img": "",
+          "id": "son-li"
+        },
+        {
+          "name": "Son kem",
+          "img": "",
+          "id": "son-kem"
+        },
+        {
+          "name": "Son dưỡng",
+          "img": "",
+          "id": "son-duong"
+        },
+        {
+          "name": "Son tint",
+          "img": "",
+          "id": "son-tint"
+        },
+        {
+          "name": "Mặt na cho môi",
+          "img": "",
+          "id": "mat-na-cho-moi"
+        },
+        {
+          "name": "Đặc trị thâm môi",
+          "img": "",
+          "id": "dac-tri-tham-moi"
+        },
+        {
+          "name": "Tẩy tế bào",
+          "img": "",
+          "id": "tay-te-bao"
+        },
+        {
+          "name": "Son bóng",
+          "img": "",
+          "id": "son-bong"
+        },
+        {
+          "name": "Chì kẻ môi",
+          "img": "",
+          "id": "chi-ke-moi"
+        }
+      ],
+      "id": "trang-diem-moi"
+    },
+    {
+      "name": "Trang điểm mặt",
+      "detail": [],
+      "id": "trang-diem-mat"
+    },
+    {
+      "name": "Làm sạch da mặt",
+      "detail": [],
+      "id": "lam-sach-da-mat"
+    },
+    {
+      "name": "Mặt nạ dưỡng da",
+      "detail": [],
+      "id": "mat-na-duong-da"
+    },
+    {
+      "name": "Trị liệu chuyên sâu da mặt",
+      "detail": [],
+      "id": "tri-lieu-chuyen-sau-da-mat"
+    },
+    {
+      "name": "Tắm và chăm sóc cơ thể",
+      "detail": [],
+      "id": "tam-va-cham-soc-co-the"
+    },
+    {
+      "name": "Chăm sóc tóc",
+      "detail": [],
+      "id": "cham-soc-toc"
+    }
+  ],
+  "day-dep": [
+    {
+      "name": "Dép nữ",
+      "detail": [],
+      "id": "dep-nu"
+    },
+    {
+      "name": "Giày cao gót nữ",
+      "detail": [],
+      "id": "giay-cao-got-nu"
+    },
+    {
+      "name": "Giày sandal nữ",
+      "detail": [],
+      "id": "giay-sandal-nu"
+    },
+    {
+      "name": "Giày sneaker thể thao nữ",
+      "detail": [],
+      "id": "giay-sneaker-the-thao-nu"
+    },
+    {
+      "name": "Giày lười nam",
+      "detail": [],
+      "id": "giay-luoi-nam"
+    },
+    {
+      "name": "Giày sneaker thể thao nam",
+      "detail": [],
+      "id": "giay-sneaker-the-thao-nam"
+    },
+    {
+      "name": "Dép nam",
+      "detail": [],
+      "id": "dep-nam"
+    },
+    {
+      "name": "Giày thể thao chuyên dụng",
+      "detail": [],
+      "id": "giay-the-thao-chuyen-dung"
+    },
+    {
+      "name": "Giày tây nam",
+      "detail": [],
+      "id": "giay-tay-nam"
+    }
+  ],
+  "tui-sach": [
+    {
+      "name": "Balo",
+      "detail": [],
+      "id": "balo"
+    },
+    {
+      "name": "Túi xách nữ",
+      "detail": [],
+      "id": "tui-xach-nu"
+    },
+    {
+      "name": "Ví bóp nam",
+      "detail": [],
+      "id": "vi-bop-nam"
+    },
+    {
+      "name": "Ví bóp nữ",
+      "detail": [],
+      "id": "vi-bop-nu"
+    },
+    {
+      "name": "Vali",
+      "detail": [],
+      "id": "vali"
+    },
+    {
+      "name": "Túi laptop",
+      "detail": [],
+      "id": "tui-laptop"
+    }
+  ],
+  "dong-ho": [
+    {
+      "name": "Đồng hồ nam",
+      "detail": [],
+      "id": "dong-ho-nam"
+    },
+    {
+      "name": "Đồng hồ nữ",
+      "detail": [],
+      "id": "dong-ho-nu"
+    },
+    {
+      "name": "Đồng hồ đôi",
+      "detail": [],
+      "id": "dong-ho-doi"
+    },
+    {
+      "name": "Đồng hồ trẻ em",
+      "detail": [],
+      "id": "dong-ho-tre-em"
+    },
+    {
+      "name": "Đồng hồ khác",
+      "detail": [],
+      "id": "dong-ho-khac"
+    },
+    {
+      "name": "Phụ kiện đồng hồ",
+      "detail": [],
+      "id": "phu-kien-dong-ho"
+    }
+  ],
+  "trang-suc": [
+    {
+      "name": "Vòng lắc tay",
+      "detail": [],
+      "id": "vong-lac-tay"
+    },
+    {
+      "name": "Dây chuyền vòng cổ",
+      "detail": [],
+      "id": "day-chuyen-vong-co"
+    },
+    {
+      "name": "Bông tai khuyên tai",
+      "detail": [],
+      "id": "bong-tai-khuyen-tai"
+    },
+    {
+      "name": "Nhẫn",
+      "detail": [],
+      "id": "nhan"
+    },
+    {
+      "name": "Set bộ trang sức",
+      "detail": [],
+      "id": "set-bo-trang-suc"
+    },
+    {
+      "name": "Trang sức cơ thể",
+      "detail": [],
+      "id": "trang-suc-co-the"
+    },
+    {
+      "name": "Trang sức cặp đôi",
+      "detail": [],
+      "id": "trang-suc-cap-doi"
+    },
+    {
+      "name": "Trang sức cho bé",
+      "detail": [],
+      "id": "trang-suc-cho-be"
+    }
+  ],
+  "me-va-be": [
+    {
+      "name": "Bỉm tã vệ sinh",
+      "detail": [],
+      "id": "bim-ta-ve-sinh"
+    },
+    {
+      "name": "Chăm sóc sức khoẻ và an toàn",
+      "detail": [],
+      "id": "cham-soc-suc-khoe-va-an-toan"
+    },
+    {
+      "name": "Sữa và thức ăn",
+      "detail": [],
+      "id": "sua-va-thuc-an"
+    }
+  ]
+}

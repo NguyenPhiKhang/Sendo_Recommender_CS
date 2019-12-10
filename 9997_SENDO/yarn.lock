@@ -2343,6 +2343,11 @@ domexception@^1.0.1:
   dependencies:
     webidl-conversions "^4.0.2"
 
+dooboolab-welcome@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.1.1.tgz#ca2184f6e1f568865d707a6ce3bda7e003550f54"
+  integrity sha512-tQ/9NBCGnalHwKOBjDqTD4t4wQpDfSSbxQGctzkzaLHR3AhN0wCBkIs05JciVtvl/jfLZ+DgAndktAMk3Bu7Vw==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -5674,6 +5679,13 @@ react-native-branch@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-3.0.1.tgz#5b07b61cbd290168cd3c3662e017ebe0f356d2ca"
   integrity sha512-vbcYxPZlpF5f39GAEUF8kuGQqCNeD3E6zEdvtOq8oCGZunHXlWlKgAS6dgBKCvsHvXgHuMtpvs39VgOp8DaKig==
+
+react-native-drop-down-item@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-drop-down-item/-/react-native-drop-down-item-1.1.0.tgz#63ff6d0c4245fcd35108c7f7707b43d6ea600bbf"
+  integrity sha512-kyaCr+L9HrcdHy/0M2p3KQ9xy+QC31Or0l06y8Kwz2oe00kXlNZpZjvj35Z4XORa4rBnzn4qJ082rnASgTe9vw==
+  dependencies:
+    dooboolab-welcome "^1.1.0"
 
 react-native-gesture-handler@~1.3.0:
   version "1.3.0"

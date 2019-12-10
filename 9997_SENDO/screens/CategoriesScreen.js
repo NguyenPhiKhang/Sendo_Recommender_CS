@@ -5,7 +5,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { TabViewVertical, TabBarVertical } from 'react-native-vertical-tab-view';
 import { SceneMap } from 'react-native-tab-view';
 import { ScrollView } from 'react-native-gesture-handler';
+import DropDownItem from 'react-native-drop-down-item';
+import danhmucJson from './../utils/danhmuc.json';
+import { Button } from 'react-native-paper';
 
+const IC_ARR_DOWN = require('./../assets/images/ic_arr_down.png');
+const IC_ARR_UP = require('./../assets/images/ic_arr_up.png');
 
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 35 : StatusBarManager.HEIGHT;
@@ -22,7 +27,7 @@ const DanhChoBanScreen = (props) => {
             flexDirection: 'row',
             backgroundColor: '#20242a',
             flexWrap: 'wrap',
-            justifyContent:'space-between',
+            justifyContent: 'space-between',
             marginHorizontal: 20
           }}>
           {
@@ -41,46 +46,86 @@ const DanhChoBanScreen = (props) => {
   }
 }
 
-const ThoiTrangNuScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Thời trang nữ</Text>
-  </View>
-);
-const ThoiTrangNamScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Thời trang nam</Text>
-  </View>
-);
-const SucKhoeLamDepScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Sức khoẻ và làm đẹp</Text>
-  </View>
-);
-const GiayDepScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Giày dép</Text>
-  </View>);
-const TuiXachScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Túi xách</Text>
-  </View>
-);
-const DongHoScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Đồng hồ</Text>
-  </View>
-);
-const TrangSucScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Trang Sức</Text>
-  </View>
-);
-const MeBeScreen = () => (
-  <View style={styles.scene}>
-    <Text style={{ color: '#fff', fontSize: 25, fontWeight: 'bold' }}>Mẹ và Bé</Text>
-  </View>
-);
+const NoRecommanderScreen = (props) => {
+  const { idlv1, lv1 } = props;
+  return (
+    <View style={styles.scene}>
+      <ScrollView
+        bounces={false}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          backgroundColor: '#20242a',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          marginHorizontal: 20
+        }}>
 
+        {/* HELP: click chổ này thì em gọi api số 1 vs lv1: idlv1, https://mapi.sendo.vn/mob/product/cat/${idlv1}?p=1 */}
+        <View style={{ flexDirection: 'row-reverse', marginTop: 8 }}>
+          <Ionicons color='#ff6dd6' name='ios-arrow-forward' size={18} />
+          <Text style={{
+            fontSize: 15,
+            fontWeight: "600",
+            fontStyle: "normal",
+            color: "#ff6dd6",
+            marginRight: 8,
+            marginBottom: 8
+          }}>Xem tất cả</Text>
+        </View>
+
+        {
+          lv1
+            ? lv1.map(lv2 => {
+              return (
+                <DropDownItem
+                  key={lv2.id}
+                  style={{ marginBottom: 8 }}
+                  contentVisible={false}
+                  invisibleImage={IC_ARR_DOWN}
+                  visibleImage={IC_ARR_UP}
+                  header={
+                    <View style={{
+                      flex: 0.6,
+                      borderRadius: 4,
+                      backgroundColor: 'rgb(51, 58, 68)'
+                    }}>
+                      <Button style={{
+                        fontSize: 16,
+                        flex: 1,
+                        flexDirection: 'row',
+                      }} color='rgba(255, 255, 255, 0.87)' uppercase={false}>{lv2.name}</Button>
+                    </View>
+                  }
+                >
+                  {
+                    lv2.detail.length != 0
+                      ? lv2.detail.map(lv3 => {
+                        console.log(lv3.img);
+                        const defaultCategory = require('./../assets/images/category/default.png');
+                        const imgSrc = lv3.img == '' ? defaultCategory : {uri: lv3.img};
+
+                        {/* HELP: click chổ này thì em gọi api số 1 vs lv1: idlv1, lv2: lv2.id, lv3: lv3.id https://mapi.sendo.vn/mob/product/cat/${idlv1}/${lv2.id}/${lv3.id}?p=1 */}
+                        return (
+                          <ImageBackground key={lv3.id} source={imgSrc} style={styles.backgroundImg}>
+                            <Text style={{ color: 'rgb(26,188,254)', fontSize: 13, paddingRight: 5 }}>{lv3.name}</Text>
+                          </ImageBackground>
+                        )
+                      })
+                      : null
+                  }
+
+                </DropDownItem>
+              );
+            })
+            : null
+        }
+
+      </ScrollView>
+    </View>
+
+
+  )
+}
 
 const initialLayout = {
   height: 0,
@@ -168,21 +213,21 @@ export default class CategoriesScreen extends Component {
 
   _renderScene = SceneMap({
     DanhChoBan: () => <DanhChoBanScreen data={this.props.dataCategories} />,
-    ThoiTrangNu: ThoiTrangNuScreen,
-    ThoiTrangNam: ThoiTrangNamScreen,
-    SucKhoeLamDep: SucKhoeLamDepScreen,
-    GiayDep: GiayDepScreen,
-    TuiXach: TuiXachScreen,
-    DongHo: DongHoScreen,
-    TrangSuc: TrangSucScreen,
-    MeBe: MeBeScreen,
+    ThoiTrangNu: () => <NoRecommanderScreen idlv1={'thoi-trang-nu'} lv1={danhmucJson['thoi-trang-nu']} />,
+    ThoiTrangNam: () => <NoRecommanderScreen idlv1={'thoi-trang-nam'} lv1={danhmucJson['thoi-trang-nam']} />,
+    SucKhoeLamDep: () => <NoRecommanderScreen idlv1={'suc-khoe-lam-dep'} lv1={danhmucJson['suc-khoe-lam-dep']} />,
+    GiayDep: () => <NoRecommanderScreen idlv1={'day-dep'} lv1={danhmucJson['day-dep']} />,
+    TuiXach: () => <NoRecommanderScreen idlv1={'tui-sach'} lv1={danhmucJson['tui-sach']} />,
+    DongHo: () => <NoRecommanderScreen idlv1={'dong-ho'} lv1={danhmucJson['dong-ho']} />,
+    TrangSuc: () => <NoRecommanderScreen idlv1={'trang-suc'} lv1={danhmucJson['trang-suc']} />,
+    MeBe: () => <NoRecommanderScreen idlv1={'me-va-be'} lv1={danhmucJson['me-va-be']} />,
   });
 
   render() {
     //console.log(this.props.dataCategories);
     return (
       <View style={styles.container}>
-        <View style={{ backgroundColor: 'rgb(22, 25, 29)', height: 120, paddingTop: STATUSBAR_HEIGHT + 30, flexDirection: 'row' }}>
+        <View style={{ backgroundColor: 'rgb(22, 25, 29)', height: 82, paddingTop: STATUSBAR_HEIGHT, flexDirection: 'row' }}>
           <TouchableOpacity style={{ width: 30, height: 40, marginLeft: 10 }}
             onPress={() => { this.props.navigation.goBack(); }}>
             <Ionicons color='#fff' name='ios-arrow-back' size={30} />
@@ -198,7 +243,7 @@ export default class CategoriesScreen extends Component {
           navigationState={this.state}
           renderScene={this._renderScene}
           onIndexChange={this._handleIndexChange}
-          swipeEnabled={false}
+          swipeEnabled
           scrollEnabled
         />
       </View>
@@ -249,13 +294,13 @@ const styles = StyleSheet.create({
     width: 120,
     flexDirection: 'row'
   },
-  backgroundImg:{ 
-    width: 100, 
-    height: 100, 
-    borderRadius: 16 ,
+  backgroundImg: {
+    width: 100,
+    height: 100,
+    borderRadius: 16,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     margin: 10,
     marginBottom: 20,
-}
+  }
 });

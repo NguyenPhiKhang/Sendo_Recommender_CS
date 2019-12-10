@@ -136,8 +136,8 @@ export default class HomeScreen extends React.Component {
             <SeenProducts data={this.state.DataProductsSeen} />
             <View style={styles.headerCategories}>
               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Danh mục đề cử</Text>
-              <TouchableOpacity style={{ marginRight: 10, marginTop: 5 }} onPress={this.onPressCategories}>
-                <Ionicons color='#fff' name="ios-keypad" size={25} />
+              <TouchableOpacity style={{ marginRight: 10, marginRight: 16, marginTop: 2 }} onPress={this.onPressCategories}>
+                <Ionicons color='#fff' name="ios-keypad" size={30} />
               </TouchableOpacity>
             </View>
             <CategoriesNominated data={this.state.DataCategoritesNominated} />
