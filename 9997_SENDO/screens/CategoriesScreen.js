@@ -57,7 +57,6 @@ const NoRecommanderScreen = (props) => {
           backgroundColor: '#20242a',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
-          marginHorizontal: 20
         }}>
 
         {/* HELP: click chổ này thì em gọi api số 1 vs lv1: idlv1, https://mapi.sendo.vn/mob/product/cat/${idlv1}?p=1 */}
@@ -85,7 +84,7 @@ const NoRecommanderScreen = (props) => {
                   visibleImage={IC_ARR_UP}
                   header={
                     <View style={{
-                      flex: 0.6,
+                      width: initialLayout.width * 0.6,
                       borderRadius: 4,
                       backgroundColor: 'rgb(51, 58, 68)'
                     }}>
