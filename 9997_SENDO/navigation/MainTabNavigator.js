@@ -4,13 +4,14 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import DetailsProductScreen from '../screens/DetailsProductScreen';
 import SearchScreen from '../screens/SearchScreen';
 import AccountScreen from '../screens/AccountScreen';
 import RewardScreen from '../screens/RewardScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
+import ProductCategoriesScreen from '../screens/ProductCategoriesScreen';
 import ResultSearchScreen from '../screens/ResultSearchScreen';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Provider, connect } from 'react-redux';
@@ -27,6 +28,7 @@ let InforUserFBDetailContainer = connect(state => ({ dataUserFB: state.dataUserF
 let InforUserFBSearchContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(SearchScreen);
 let InforUserFBSearchResultContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(ResultSearchScreen);
 let InforUserFBCagegoriesContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(CategoriesScreen);
+let InforUserFBCagegoryProductContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(ProductCategoriesScreen);
 
 
 const HomeStack = createStackNavigator(
@@ -36,6 +38,7 @@ const HomeStack = createStackNavigator(
     Search: InforUserFBSearchContainer,
     Categories: InforUserFBCagegoriesContainer,
     ResultSearch: InforUserFBSearchResultContainer,
+    ProductCategory: InforUserFBCagegoryProductContainer,
   },
   {
     cardStyle: { backgroundColor: "#20242a" },
@@ -90,25 +93,25 @@ RewardStack.navigationOptions = {
 RewardStack.path = '';
 
 
-let InforUserFBSettingContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(SettingsScreen);
+let InforUserFBNotificationContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(NotificationScreen);
 
-const SettingsStack = createStackNavigator(
+const NotificationStack = createStackNavigator(
   {
-    Settings: InforUserFBSettingContainer,
+    Notification: InforUserFBNotificationContainer,
   },
   {
     cardStyle: { backgroundColor: "#20242a" },
   }
 );
 
-SettingsStack.navigationOptions = {
+NotificationStack.navigationOptions = {
   tabBarLabel: 'Notification',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-notifications-outline' : 'md-notifications-outline'} />
   ),
 };
 
-SettingsStack.path = '';
+NotificationStack.path = '';
 
 let InforUserFBAccountContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch}))(AccountScreen);
 let InforUserFBLoginContainer = connect(state => ({ dataUserFB: state.dataUserFB, dataUserLogin: state.dataUserLogin, dataCategories: state.dataCategories, dataProductSeen: state.dataProductSeen, dataProductNominated: state.dataProductNominated, dataSearch: state.dataSearch }))(LoginScreen);
@@ -145,7 +148,7 @@ AccountStack.navigationOptions = ({ navigation }) => {
 const tabNavigator = createMaterialBottomTabNavigator({
   HomeStack,
   RewardStack,
-  SettingsStack,
+  NotificationStack,
   AccountStack,
 },
   {

@@ -86,8 +86,8 @@ function DataSearch(state, action){
   switch (action.type) {
     case 'dataSearchSuccess':
       state = action.data;
-      if(state.length > 10)
-        state.length = 10;
+      if(state.length > 15)
+        state.length = 15;
       return state;
     default:
       return state;

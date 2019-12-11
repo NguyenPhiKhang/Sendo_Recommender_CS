@@ -79,7 +79,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentDidMount = async () => {
-    await this.props.navigation.addListener ('willFocus', async () =>{
+    await this.props.navigation.addListener('willFocus', async () => {
       var jsonData = [];
       if (this.props.dataUserLogin === 0) {
         const response = await fetch('http://amnhac.pro/public/index');
@@ -102,12 +102,24 @@ export default class HomeScreen extends React.Component {
         console.log('login');
       }
       //this.setState({ DataProductsNominated: jsonData });
-      await this.props.dispatch({type:'dataNominatedSuccess', data: jsonData});
-      this.setState({isLoading: false});
+      await this.props.dispatch({ type: 'dataNominatedSuccess', data: jsonData });
+      this.setState({ isLoading: false });
     })
   }
 
-  onPressCategories = () => {
+  onPressCategories =  () => {
+    // const response = await fetch('http://amnhac.pro/public/recommend-category', {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     user_id: '0084FDDDFD25C812292B673906484C8C',
+    //   }),
+    // });
+    // jsonData = await response.json();
+    // console.log(jsonData);
     this.props.dispatch({ type: 'addDataCategories', data: this.state.DataCategoritesNominated });
     this.props.navigation.navigate('Categories');
   }
@@ -162,7 +174,7 @@ export default class HomeScreen extends React.Component {
                 <Ionicons color='#fff' name="ios-keypad" size={30} />
               </TouchableOpacity>
             </View>
-            <CategoriesNominated data={this.state.DataCategoritesNominated} />
+            <CategoriesNominated data={this.props.dataUserLogin} push={this.props.navigation.push} />
             <View style={{ width: '100%', height: 20, marginLeft: 10, marginVertical: 5 }}>
               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Sản phẩm đề cử</Text>
             </View>

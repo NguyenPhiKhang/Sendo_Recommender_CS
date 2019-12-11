@@ -12,14 +12,13 @@ const { StatusBarManager } = NativeModules;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 35 : StatusBarManager.HEIGHT;
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
-export default class ResultSearchScreen extends Component {
+export default class ProductCategoriesScreen extends Component {
     _isMounted = false;
 
     constructor(props) {
         super(props);
         this.state = {
             dataResult: [],
-            textValue: '',
             isLoading: true,
             isFooterLoading: false,
             isHeaderLoading: false,
@@ -35,19 +34,19 @@ export default class ResultSearchScreen extends Component {
         this.getProductsSearch();
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
-
     getProductsSearch = async (isFooterLoading = false) => {
+        const{idlv1, lv2, lv3, kind} = this.props.navigation.state.params;
         if (!this.state.lastPageReached) {
             const newPage = this.state.pageNumber + 1;
             if (this._isMounted)
-                this.setState({ isFooterLoading: isFooterLoading, textValue: this.props.navigation.state.params.valueText });
-            const searchText = (this.props.navigation.state.params.valueText + '').replace(' ', '%20');
-            const response = await fetch(`https://mapi.sendo.vn/mob/product/search?p=${newPage}&q=${searchText}`);
+                this.setState({ isFooterLoading: isFooterLoading});
+                var response;
+                if(kind===1)
+                    response = await fetch(`https://mapi.sendo.vn/mob/product/cat/${idlv1}?p=${newPage}`);
+                else response = await fetch(`https://mapi.sendo.vn/mob/product/cat/${idlv1}/${lv2.id}/${lv3.id}?p=${newPage}`);
             const json = await response.json();
             const productsData = await json.data;
+            //console.log(productsData);
             if (typeof productsData !== 'undefined') {
                 if (productsData !== []) {
                     const newProducts = await this.filterForUniqueProducts(this.state.dataResult.concat(productsData));
@@ -55,18 +54,22 @@ export default class ResultSearchScreen extends Component {
                         this.setState({ dataResult: newProducts, pageNumber: newPage, isLoading: false, isResult: true });
                 }
                 else {
-                    if (this._isMounted)
-                        this.setState({ lastPageReached: true });
+                    if(this._isMounted)
+                    this.setState({ lastPageReached: true });
                 }
-                if (this._isMounted)
-                    this.setState({ isFooterLoading: false });
+                if(this._isMounted)
+                this.setState({ isFooterLoading: false });
             }
             else {
-                if (this._isMounted)
-                    this.setState({ dataResult: [], pageNumber: 0, isLoading: false, isResult: false, lastPageReached: true, isFooterLoading: false });
+                if(this._isMounted)
+                this.setState({ dataResult: [], pageNumber: 0, isLoading: false, isResult: false, lastPageReached: true, isFooterLoading: false });
             }
         }
         else { console.log("last page") }
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
     }
 
     filterForUniqueProducts = async (arr) => {
@@ -134,7 +137,8 @@ export default class ResultSearchScreen extends Component {
                             titleColor="#fff"
                         />
                     }
-                //bounces={false}
+                    //bounces={false}
+                    contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
                 />
             )
         }
@@ -147,9 +151,7 @@ export default class ResultSearchScreen extends Component {
         }
     }
 
-    render() {
-        const { valueText } = this.props.navigation.state.params;
-        const { isLoading } = this.state;
+    loadingProduct = (isLoading) => {
         if (isLoading) {
             return (
                 <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
@@ -159,29 +161,6 @@ export default class ResultSearchScreen extends Component {
         else {
             return (
                 <View style={styles.container}>
-                    <View style={{ flexDirection: 'row', borderBottomColor: 'rgb(51, 58, 68)', borderBottomWidth: 2, height: 60 }}>
-                        <TouchableOpacity style={{ width: 30, height: 45, justifyContent: 'center', alignItems: 'center', flex: 0.05 }}
-                            onPress={() => { this.props.navigation.navigate('Home'); }}>
-                            <Ionicons color='#fff' name='ios-arrow-back' size={30} />
-                        </TouchableOpacity>
-                        <View style={styles.SectionStyle}>
-                            <Ionicons style={{ marginHorizontal: 5 }} name={Platform.OS == 'ios' ? 'ios-search' : 'md-search'} size={30} color='#fff' />
-                            <TextInput
-                                placeholder="Tìm kiếm trên Sendo"
-                                underlineColorAndroid="transparent"
-                                returnKeyType='search'
-                                placeholderTextColor="rgba(255, 255, 255, 0.6)"
-                                style={{ color: '#fff', width: 280 }}
-                                value={this.state.textValue}
-                                onChangeText={(text) => { this.setState({ textValue: text }) }}
-                                onSubmitEditing={() => this.onSearchKey(this.state.textValue + '')}
-                                autoCorrect={false}
-                            />
-                            <TouchableOpacity style={{ marginLeft: 5 }} onPress={() => console.log('cart')}>
-                                <Ionicons name={Platform.OS == 'ios' ? 'ios-cart' : 'md-cart'} size={35} color='#ec515a' />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
                     <View>
                         {this.flatlistProduct(this.state)}
                     </View>
@@ -189,18 +168,38 @@ export default class ResultSearchScreen extends Component {
             );
         }
     }
+
+    render() {
+        const { idlv1, title } = this.props.navigation.state.params;
+        const { isLoading } = this.state;
+        return (
+            <View style={styles.container}>
+                <View style={{ backgroundColor: 'rgb(22, 25, 29)', height: 82, paddingTop: STATUSBAR_HEIGHT, flexDirection: 'row', borderBottomColor: 'rgb(51, 58, 68)', borderBottomWidth: 2, }}>
+                    <TouchableOpacity style={{ width: 30, height: 40, marginLeft: 10 }}
+                        onPress={() => { this.props.navigation.goBack(); }}>
+                        <Ionicons color='#fff' name='ios-arrow-back' size={30} />
+                    </TouchableOpacity>
+                    <View style={{ width: '100%', height: 40, paddingLeft: 80 }}>
+                        <Text style={{ color: 'rgb(26, 188, 254)', fontSize: 25, fontWeight: 'bold' }}>{title}</Text>
+                    </View>
+                </View>
+                {this.loadingProduct(isLoading)}
+            </View>
+        );
+    }
 }
 
-ResultSearchScreen.navigationOptions = {
+ProductCategoriesScreen.navigationOptions = {
     header: null,
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#20242a',
-        paddingTop: STATUSBAR_HEIGHT + 10,
-        paddingHorizontal: 10,
+        //left: 115,
+
+        backgroundColor: 'rgb(22, 25, 29)'
     },
     SectionStyle: {
         flex: 0.95,
@@ -214,7 +213,7 @@ const styles = StyleSheet.create({
     },
     flatList: {
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
     lastPage: {
         alignItems: 'center',
